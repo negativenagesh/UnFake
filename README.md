@@ -76,3 +76,27 @@ params = {
 * The url is the endpoint for searching photos.
 * The headers include the authorization token.
 * The params dictionary specifies the search query and the number of images per page.
+
+# Training images
+
+I have used different types of facial images:
+1. General Human Faces:
+   1.1. human-face-images
+
+2. Ethnic Diversity:
+   2.1. asian-face-images
+   2.2. blackface-images
+   2.3. caucasianfaces-images
+
+3. Facial Features:
+   3.1. beardedface-images
+   3.2. frecklesface-images
+   3.3. wrinkledface-images
+   3.4. spectacles-images
+
+4. Age Variation:
+   4.1. childface-images
+
+5. Pose & Composition:
+   5.1. closeup-face-images
+   5.2. headshot+portrait-images
