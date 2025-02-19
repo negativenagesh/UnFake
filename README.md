@@ -1,14 +1,17 @@
 <h1 align='center'>
-    Deep fake image classification
+  Deep fake image classification
 </h1>
 
-<div align="center"
-    
+<div align="center">
+  
 ![GitHub stars](https://img.shields.io/github/stars/negativenagesh/deep-fake?style=social)
 ![GitHub watchers](https://img.shields.io/github/watchers/negativenagesh/deep-fake?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/negativenagesh/deep-fake?style=social)
 ![GitHub license](https://img.shields.io/github/license/negativenagesh/deep-fake)
 </div>
+
+# 📚 Project Overview
+This project focuses on the classification of deep fake images using deep learning techniques. Deep fake images are artificially generated images that can be used to spread misinformation or create misleading content. By accurately classifying these images, this project aims to contribute to the detection and prevention of such malicious activities. This tool is useful for researchers, security experts, and anyone interested in understanding and combating the spread of deep fake content.
 
 # ⚙️ Setup
 1. Star and Fork this repo by clicking 'fork' in right side above, then follow below steps
@@ -26,7 +29,6 @@ python3.12 -m venv deep
 ```bash
   source deep/bin/activate
 ```
-
 5. Install dependencies:
 ```bash
 pip install -r required.txt
@@ -37,3 +39,40 @@ reate a new file named .env in the root directory of the project:
 Get your free API key from here by sending an application:
 https://unsplash.com/oauth/applications
 ```
+
+# 🌐 Unsplash API Overview:
+
+Basic Structure of the Unsplash API
+The Unsplash API follows RESTful principles and uses HTTP methods (GET, POST, etc.) to interact with resources. Key features include:
+
+1. Authentication: Requires an access_key (Client ID) for authorization.
+
+2. Endpoints: Various endpoints for searching, downloading, and managing images.
+
+3. Parameters: Query parameters like query, page, per_page, etc., to customize requests.
+
+4. Rate Limiting: Limits the number of requests per hour (e.g., 50 requests per hour for free tier).
+
+# Example Usage
+
+1. Setup and Authentication
+
+```python
+import requests
+import os
+import time
+
+access_key = "YOUR-API-KEY"
+url = "https://api.unsplash.com/search/photos"
+headers = {
+    "Authorization": f"Client-ID {access_key}"
+}
+params = {
+    "query": "Spectacles face", #EXAMPLE OF IMAGE 
+    "per_page": 30
+}
+```
+* The access_key is your Unsplash API Client ID.
+* The url is the endpoint for searching photos.
+* The headers include the authorization token.
+* The params dictionary specifies the search query and the number of images per page.
