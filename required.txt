@@ -1,4 +1,9 @@
-requests
-os
-time
-shutil
+torch
+torchvision
+torchaudio
+diffusers
+transformers
+accelerate
+scipy
+safetensors
+pillow
