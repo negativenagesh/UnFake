@@ -93,3 +93,33 @@ with torch.autocast("cuda"):
                     guidance_scale=guidance_scale, 
                     negative_prompt=negative_prompt
                 ).images[0]
+
+
+Source:Grok
+
+Prompt 1: Baseline Realistic Portrait
+# Define the prompt and parameters
+prompt = (
+    "A highly detailed, photorealistic portrait of the person from the input image, 8K resolution, "
+    "realistic facial features with natural skin texture, detailed eyes with light reflections, "
+    "soft studio lighting, sharp focus, subtle shadows, high quality, trending on ArtStation"
+)
+
+negative_prompt = (
+    "blurry, low resolution, distorted, unrealistic, cartoonish, oversaturated, overexposed, "
+    "bad anatomy, extra limbs, deformed face, artifacts, low quality"
+)
+
+strength = 0.7
+guidance_scale = 10.0
+
+# Generate the image
+with torch.autocast("cuda"):
+    output_image = pipe(prompt=prompt, 
+                    image=input_image, 
+                    strength=strength, 
+                    guidance_scale=guidance_scale, 
+                    negative_prompt=negative_prompt
+                ).images[0]
+
+
