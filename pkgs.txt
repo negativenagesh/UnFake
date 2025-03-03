@@ -7,3 +7,4 @@ accelerate
 scipy
 safetensors
 pillow
+opencv-python
