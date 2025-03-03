@@ -3,11 +3,18 @@ from pathlib import Path
 import numpy as np
 import cv2
 import face_recognition
-from PIL import Image
+from PIL import Image, ImageDraw
 
-def extract_faces_from_images(input_folder, output_folder):
+def extract_faces_from_images(input_folder, output_folder, use_gpu=True):
     # Create output folder if it doesn't exist
     Path(output_folder).mkdir(parents=True, exist_ok=True)
+    
+    # Set GPU usage for face_recognition if available
+    if use_gpu:
+        face_recognition.api.batch_face_locations = face_recognition.api._raw_face_locations_batched
+        face_recognition_model = "cnn"  # CNN model uses GPU if available
+    else:
+        face_recognition_model = "hog"  # HOG model is CPU-only
     
     # Process each image in the input folder
     supported_extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.webp', '.tiff', '.JPG', '.JPEG', '.PNG', '.BMP', '.WEBP', '.TIFF')
@@ -22,46 +29,25 @@ def extract_faces_from_images(input_folder, output_folder):
                 # Convert PIL image to numpy array for face detection
                 input_np = np.array(input_image)
                 
-                # Detect faces using face_recognition
-                face_locations = face_recognition.face_locations(input_np)
+                # Detect faces using face_recognition with GPU model if enabled
+                face_locations = face_recognition.face_locations(input_np, model=face_recognition_model)
+                
+                # Save the image regardless of face detection
+                output_path = os.path.join(output_folder, filename)
+                input_image.save(output_path)
                 
                 if not face_locations:
-                    print(f"No face detected in {filename}, skipping")
-                    continue
-                
-                # Process each detected face
-                for i, face_location in enumerate(face_locations):
-                    top, right, bottom, left = face_location
-                    
-                    # Add padding to face for better results (30% padding to include more of head/neck)
-                    height, width = bottom - top, right - left
-                    padding_h = int(height * 0.3)
-                    padding_w = int(width * 0.3)
-                    
-                    # Apply padding with boundary checks
-                    # Add more padding at the bottom for neck
-                    face_top = max(0, top - padding_h)
-                    face_bottom = min(input_np.shape[0], bottom + padding_h * 2)  # Extra padding for neck
-                    face_left = max(0, left - padding_w)
-                    face_right = min(input_np.shape[1], right + padding_w)
-                    
-                    # Extract the face region
-                    face_img = input_image.crop((face_left, face_top, face_right, face_bottom))
-                    
-                    # Save the extracted face
-                    face_filename = f"face_{i+1}_{filename}"
-                    output_path = os.path.join(output_folder, face_filename)
-                    face_img.save(output_path)
-                    
-                    print(f"Extracted face {i+1} from {filename} -> Saved as {face_filename}")
+                    print(f"No face detected in {filename}, but image saved anyway")
+                else:
+                    print(f"Saved image {filename} with {len(face_locations)} faces detected")
                     
             except Exception as e:
                 print(f"Error processing {filename}: {str(e)}")
     
-    print("All faces extracted successfully!")
+    print("All images saved successfully!")
 
 # Example usage
 if __name__ == "__main__":
     input_folder = "/home/vu-lab03-pc24/Downloads/merged_shuffled_images"
     output_folder = "/home/vu-lab03-pc24/Downloads/deep-fake/extracted-faces"
-    extract_faces_from_images(input_folder, output_folder)
+    extract_faces_from_images(input_folder, output_folder, use_gpu=True)
