@@ -1,0 +1,125 @@
+                                            ----------- Top Prompts (source: Grok 3 beta)-----------                                            
+
+
+
+3. best so far
+
+prompt = (
+    "A hyper-detailed, ultra-realistic portrait of the person from the input image, photorealistic, 8K resolution, "
+    "exceptionally lifelike facial features with visible skin pores, subtle imperfections, and natural micro-textures, "
+    "intricate eye details with realistic iris patterns, light reflections, and depth, individual hair strands with natural sheen and flow, "
+    "soft cinematic lighting with delicate shadows and highlights, perfectly balanced color tones, "
+    "professional studio photography quality, razor-sharp focus, micro-details like faint freckles or fine wrinkles, "
+    "dynamic depth of field, rendered in the style of Unreal Engine 5 hyper-realism, trending on ArtStation, "
+    "no digital noise or artifacts, maximum fidelity, lifelike presence and emotional authenticity"
+)
+
+negative_prompt = (
+    "blurry, low resolution, pixelated, grainy, distorted, unrealistic, cartoonish, oversaturated, "
+    "overexposed, underexposed, flat colors, dull, oversmoothed, overprocessed, synthetic look, plastic texture, "
+    "uncanny valley, bad anatomy, extra limbs, mutated hands, deformed face, disfigured, poorly drawn eyes, "
+    "poorly rendered skin, unnatural lighting, text, watermark, logo, signature, low quality, artifacts, amateurish"
+)
+
+strength = 0.7  # Controls the influence of the input image on the output
+guidance_scale = 12.0  # Increased for stricter prompt adherence to enhance realism
+
+with torch.autocast("cuda"):
+    output_image = pipe(prompt=prompt, 
+                    image=input_image, 
+                    strength=strength, 
+                    guidance_scale=guidance_scale, 
+                    negative_prompt=negative_prompt
+                ).images[0]
+
+
+1.
+
+# Define the prompt and parameters
+prompt = (
+    "A highly detailed and realistic image of the person in the input image, "
+    "ultra-realistic, photorealistic, 8k resolution, intricate facial features, "
+    "natural skin texture, realistic hair, detailed eyes with reflections, "
+    "soft lighting, cinematic composition, professional portrait photography, "
+    "sharp focus, no artifacts, ultra-high quality, trending on ArtStation, Unreal Engine 5"
+)
+
+negative_prompt = (
+   "blurry, low quality, distorted, artifacts, cartoonish, unrealistic, oversaturated, overexposed, underexposed, bad anatomy, extra limbs, mutated hands, mutated fingers, deformed face, disfigured, poorly drawn face, poorly drawn hands, poorly drawn eyes, text, watermark, logo, signature, out of focus, grainy, pixelated, noisy, low resolution, ugly, unnatural lighting, flat, dull, oversmoothed, overprocessed"
+)
+
+strength = 0.7  # Controls the influence of the input image on the output
+guidance_scale = 10.0  # Controls how closely the output follows the prompt
+
+# Generate the image
+with torch.autocast("cuda"):
+    output_image = pipe(prompt=prompt, 
+                    image=input_image, 
+                    strength=strength, 
+                    guidance_scale=guidance_scale, 
+                    negative_prompt=negative_prompt
+                ).images[0]
+
+
+
+2.
+
+prompt = (
+    "A hyper-realistic portrait of the person from the input image, ultra-detailed, photorealistic, 8K resolution, "
+    "exceptionally intricate facial features, lifelike skin with visible pores and subtle blemishes, "
+    "natural micro-textures on skin, highly detailed eyes with realistic iris patterns and light reflections, "
+    "individual strands of hair with natural flow and shine, soft cinematic lighting with subtle shadows, "
+    "perfectly balanced color tones, professional studio photography, razor-sharp focus, "
+    "micro-details like faint freckles or skin imperfections, dynamic depth of field, "
+    "rendered in the style of cutting-edge CGI from Unreal Engine 5, trending on ArtStation, "
+    "no visible digital artifacts, ultra-high fidelity, lifelike presence"
+)
+
+negative_prompt = (
+    "blurry, low resolution, pixelated, grainy, noisy, distorted, unrealistic, cartoonish, "
+    "oversaturated, overexposed, underexposed, flat colors, dull, oversmoothed, overprocessed, "
+    "bad anatomy, extra limbs, mutated hands, deformed face, disfigured, poorly drawn eyes, "
+    "poorly rendered skin, unnatural lighting, text, watermark, logo, signature, "
+    "low quality, artifacts, synthetic look, plastic texture, uncanny valley, amateurish"
+)
+
+strength = 0.7  # Controls the influence of the input image on the output
+guidance_scale = 12.0  # Increased slightly for stronger adherence to the detailed prompt
+
+with torch.autocast("cuda"):
+    output_image = pipe(prompt=prompt, 
+                    image=input_image, 
+                    strength=strength, 
+                    guidance_scale=guidance_scale, 
+                    negative_prompt=negative_prompt
+                ).images[0]
+
+
+Source:Grok
+
+Prompt 1: Baseline Realistic Portrait
+# Define the prompt and parameters
+prompt = (
+    "A highly detailed, photorealistic portrait of the person from the input image, 8K resolution, "
+    "realistic facial features with natural skin texture, detailed eyes with light reflections, "
+    "soft studio lighting, sharp focus, subtle shadows, high quality, trending on ArtStation"
+)
+
+negative_prompt = (
+    "blurry, low resolution, distorted, unrealistic, cartoonish, oversaturated, overexposed, "
+    "bad anatomy, extra limbs, deformed face, artifacts, low quality"
+)
+
+strength = 0.7
+guidance_scale = 10.0
+
+# Generate the image
+with torch.autocast("cuda"):
+    output_image = pipe(prompt=prompt, 
+                    image=input_image, 
+                    strength=strength, 
+                    guidance_scale=guidance_scale, 
+                    negative_prompt=negative_prompt
+                ).images[0]
+
+
