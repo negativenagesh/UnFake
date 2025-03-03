@@ -62,6 +62,6 @@ def extract_faces_from_images(input_folder, output_folder):
 
 # Example usage
 if __name__ == "__main__":
-    input_folder = "/home/vu-lab03-pc24/Downloads/deep-fake/facerec"
+    input_folder = "/home/vu-lab03-pc24/Downloads/merged_shuffled_images"
     output_folder = "/home/vu-lab03-pc24/Downloads/deep-fake/extracted-faces"
     extract_faces_from_images(input_folder, output_folder)
