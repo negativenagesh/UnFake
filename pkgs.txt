@@ -8,3 +8,4 @@ scipy
 safetensors
 pillow
 opencv-python
+numpy
