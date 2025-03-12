@@ -5,7 +5,7 @@ import cv2
 import face_recognition
 from PIL import Image, ImageDraw
 
-def extract_faces_from_images(input_folder, output_folder, start_index=34957, end_index=35292, use_gpu=True):
+def extract_faces_from_images(input_folder, output_folder, start_index=70785, end_index=70000, use_gpu=True):
     # Create output folder if it doesn't exist
     Path(output_folder).mkdir(parents=True, exist_ok=True)
     
@@ -21,21 +21,20 @@ def extract_faces_from_images(input_folder, output_folder, start_index=34957, en
     all_files = sorted([f for f in os.listdir(input_folder) if f.lower().endswith(supported_extensions)])
     
     # Sanity check to make sure we have enough images
-    if len(all_files) <= start_index:
+    if len(all_files) < start_index:
         print(f"Warning: Only {len(all_files)} files found, but start_index is {start_index}")
-        return
+        start_index = len(all_files) - 1
     
-    if len(all_files) < end_index:
-        print(f"Warning: Only {len(all_files)} files found, but end_index is {end_index}")
-        end_index = len(all_files)
-    
-    # Process images in ascending order from start_index to end_index
-    total_to_process = end_index - start_index
+    # Process images in reverse order from start_index to end_index
+    total_to_process = start_index - end_index + 1
     processed_count = 0
     
-    print(f"Starting to process {total_to_process} images from index {start_index} up to {end_index}")
+    print(f"Starting to process {total_to_process} images from index {start_index} down to {end_index}")
     
-    for i in range(start_index, end_index):
+    for i in range(start_index, end_index - 1, -1):
+        if i >= len(all_files):
+            continue
+            
         filename = all_files[i]
         processed_count += 1
         
@@ -75,5 +74,5 @@ def extract_faces_from_images(input_folder, output_folder, start_index=34957, en
 # Example usage
 if __name__ == "__main__":
     input_folder = "/home/vu-lab03-pc24/Downloads/merged_shuffled_images"
-    output_folder = "/home/vu-lab03-pc24/Downloads/deep-fake/extracted-faces-parallel-2"
-    extract_faces_from_images(input_folder, output_folder, start_index=34957, end_index=35292, use_gpu=True)
+    output_folder = "/home/vu-lab03-pc24/Downloads/deep-fake/extracted-faces-parallel-1"
+    extract_faces_from_images(input_folder, output_folder, start_index=70785, end_index=70000, use_gpu=True)
