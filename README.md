@@ -46,7 +46,7 @@ python3.12 -m venv deep
 ```
 5. Install dependencies:
 ```bash
-pip install -r required.txt
+pip install -r pkgs.txt
 ```
 6. API set-up:
 ```txt
