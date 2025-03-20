@@ -5,7 +5,7 @@ import cv2
 import face_recognition
 from PIL import Image, ImageDraw
 
-def extract_faces_from_images(input_folder, output_folder, start_index=45811, end_index=50295, use_gpu=True):
+def extract_faces_from_images(input_folder, output_folder, start_index=55000, end_index=60000, use_gpu=True):
     # Create output folder if it doesn't exist
     Path(output_folder).mkdir(parents=True, exist_ok=True)
     
@@ -76,4 +76,4 @@ def extract_faces_from_images(input_folder, output_folder, start_index=45811, en
 if __name__ == "__main__":
     input_folder = "/home/vu-lab03-pc24/Downloads/merged_shuffled_images"
     output_folder = "/home/vu-lab03-pc24/Downloads/deep-fake/extracted-faces-parallel-5"
-    extract_faces_from_images(input_folder, output_folder, start_index=45811, end_index=50295, use_gpu=True)
+    extract_faces_from_images(input_folder, output_folder, start_index=55000, end_index=60000, use_gpu=True)
