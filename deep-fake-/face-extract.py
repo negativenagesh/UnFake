@@ -76,4 +76,4 @@ def extract_faces_from_images(input_folder, output_folder, start_index=34957, en
 if __name__ == "__main__":
     input_folder = "/home/vu-lab03-pc24/Downloads/merged_shuffled_images"
     output_folder = "/home/vu-lab03-pc24/Downloads/deep-fake/extracted-faces-parallel-2"
-    extract_faces_from_images(input_folder, output_folder, start_index=34957, end_index=35292, use_gpu=True)
+    extract_faces_from_images(input_folder, output_folder, start_index=35292, end_index=40, use_gpu=True)
