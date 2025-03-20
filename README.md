@@ -13,6 +13,7 @@
 ![GitHub license](https://img.shields.io/github/license/negativenagesh/deep-fake)
 </div>
 
+## Overview
 This project focuses on building a deepfake image classification system for face images from Unsplash, a platform with billions of images. The goal is to determine whether an image is a deepfake or real, addressing the growing concern of manipulated media on such platforms.
 
 The advent of deepfake technology, powered by advances in artificial intelligence and deep learning, has blurred the lines between reality and fabrication in digital media. Deepfakes, particularly image-based, pose significant threats to the authenticity of content on platforms like Unsplash, which hosts billions of images used for creative, professional, and personal purposes. The ability to create highly realistic manipulated images has implications for misinformation, trust, and legal integrity, necessitating robust detection systems. This project addresses this need by developing a classification system to identify whether Unsplash face images are deepfake or real, contributing to the broader effort to safeguard digital media authenticity.
