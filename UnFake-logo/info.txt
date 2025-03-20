@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: Aladin-Regular
+font link: https://fonts.google.com/specimen/Aladin
+font author: Sudtipos
+font author site: https://www.sudtipos.com/
+Slogan Font: Fanwood Text.otf
+
+icon designer: Smashicons
+icon designer link: /smashicons
+        
+{"bg":"#594F40","icon":"#DA4F39","font":"#ffffff","slogan":"#ffffff"}
+      
