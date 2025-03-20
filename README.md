@@ -37,6 +37,12 @@ The advent of deepfake technology, powered by advances in artificial intelligenc
        |--> [Image Click]
        |--> [Classify Button Click]
 ```
+### Landing page
+
+<div align="center">
+    
+![image](https://github.com/user-attachments/assets/1ccafe98-7c28-4b0a-858f-5de4da3a7f0a)
+</div>
 
 ## ⚙️ Setup
 1. Star and Fork this repo by clicking 'fork' in right side above, then follow below steps
