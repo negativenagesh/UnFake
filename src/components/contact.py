@@ -3,7 +3,7 @@ import streamlit as st
 
 def render_contact_section():
     # Load CSS
-    with open("src/styles/contact.css") as f:
+    with open("src/styles/styles.css") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
     # Contact Section HTML
