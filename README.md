@@ -1,7 +1,7 @@
 <div>
 
 <div align="center">
-    <img src="https://github.com/negativenagesh/deep-fake/blob/main/UnFake-logo/image.png" alt="UnFake Logo" style="width: 500px; height: 500px;">
+    <img src="https://github.com/negativenagesh/deep-fake/blob/main/UnFake-logo/logo.png" alt="UnFake Logo" style="width: 700px; height: 300px;">
 </div>
 </div>
 
