@@ -77,7 +77,7 @@ params = {
 * The headers include the authorization token.
 * The params dictionary specifies the search query and the number of images per page.
 
-# Training images
+# Scope of Training
 
 I have used different types of facial images:
 1. General Human Faces:
