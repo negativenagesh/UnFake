@@ -21,12 +21,22 @@ The advent of deepfake technology, powered by advances in artificial intelligenc
 ## Scope of training
 * Dataset and Categories
   - The dataset comprises around 70,000 images scraped from Unsplash using its API, categorized into:
-
 * General Human Faces: Human face images.
 * Ethnic Diversity: Asian, Black, and Caucasian face images.
 * Facial Features: Bearded, freckles, wrinkled, and spectacles face images.
 * Age Variation: Child face images.
 * Pose & Composition: Close-up and headshot/portrait images.
+
+### System Design
+```txt
+[User] --> [Frontend] --> [Backend] --> [Zyte API] --> [Unsplash]
+       |                  |            |
+       |                  |            --> [Deepfake Model]
+       |                  |--> [Classification Result]
+       |--> [Search Query]
+       |--> [Image Click]
+       |--> [Classify Button Click]
+```
 
 ## ⚙️ Setup
 1. Star and Fork this repo by clicking 'fork' in right side above, then follow below steps
