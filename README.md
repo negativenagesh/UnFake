@@ -10,10 +10,22 @@
 ![GitHub license](https://img.shields.io/github/license/negativenagesh/deep-fake)
 </div>
 
-# 📚 Project Overview
-This project focuses on the classification of deep fake images using deep learning techniques. Deep fake images are artificially generated images that can be used to spread misinformation or create misleading content. By accurately classifying these images, this project aims to contribute to the detection and prevention of such malicious activities. This tool is useful for researchers, security experts, and anyone interested in understanding and combating the spread of deep fake content.
+## Project Overview
+This project focuses on building a deepfake image classification system for face images from Unsplash, a platform with billions of images. The goal is to determine whether an image is a deepfake or real, addressing the growing concern of manipulated media on such platforms.
 
-# ⚙️ Setup
+The advent of deepfake technology, powered by advances in artificial intelligence and deep learning, has blurred the lines between reality and fabrication in digital media. Deepfakes, particularly image-based, pose significant threats to the authenticity of content on platforms like Unsplash, which hosts billions of images used for creative, professional, and personal purposes. The ability to create highly realistic manipulated images has implications for misinformation, trust, and legal integrity, necessitating robust detection systems. This project addresses this need by developing a classification system to identify whether Unsplash face images are deepfake or real, contributing to the broader effort to safeguard digital media authenticity.
+
+## Scope of training
+* Dataset and Categories
+  - The dataset comprises around 70,000 images scraped from Unsplash using its API, categorized into:
+
+* General Human Faces: Human face images.
+* Ethnic Diversity: Asian, Black, and Caucasian face images.
+* Facial Features: Bearded, freckles, wrinkled, and spectacles face images.
+* Age Variation: Child face images.
+* Pose & Composition: Close-up and headshot/portrait images.
+
+## ⚙️ Setup
 1. Star and Fork this repo by clicking 'fork' in right side above, then follow below steps
 
 2. Clone this repo:
@@ -40,17 +52,14 @@ Get your free API key from here by sending an application:
 https://unsplash.com/oauth/applications
 ```
 
-# 🌐 Unsplash API Overview:
+## 🌐 Unsplash API Overview:
 
 Basic Structure of the Unsplash API
 The Unsplash API follows RESTful principles and uses HTTP methods (GET, POST, etc.) to interact with resources. Key features include:
 
 1. Authentication: Requires an access_key (Client ID) for authorization.
-
 2. Endpoints: Various endpoints for searching, downloading, and managing images.
-
 3. Parameters: Query parameters like query, page, per_page, etc., to customize requests.
-
 4. Rate Limiting: Limits the number of requests per hour (e.g., 50 requests per hour for free tier).
 
 # Example Usage
@@ -77,26 +86,5 @@ params = {
 * The headers include the authorization token.
 * The params dictionary specifies the search query and the number of images per page.
 
-# Scope of Training
-
-I have used different types of facial images:
-1. General Human Faces:
-   1.1. human-face-images
-
-2. Ethnic Diversity:
-   2.1. asian-face-images
-   2.2. blackface-images
-   2.3. caucasianfaces-images
-
-3. Facial Features:
-   3.1. beardedface-images
-   3.2. frecklesface-images
-   3.3. wrinkledface-images
-   3.4. spectacles-images
-
-4. Age Variation:
-   4.1. childface-images
-
-5. Pose & Composition:
-   5.1. closeup-face-images
-   5.2. headshot+portrait-images
+<div style=" border-radius: 10px; animation: fadeOutIn 2s infinite;"> <h2 style="color: #00d4ff;">License</h2> <p style="color: #b0b0b3;"> Resumai is licensed under the <a href="https://github.com/negativenagesh/deep-fake/blob/main/LICENSE">Apache License Version 2.0</a>. Feel free to use, modify, and share! ❤️ </p> 
+</div>
