@@ -1,6 +1,10 @@
+<div>
+
 <h1 align='center'>
-  Deep fake image classification
+  UnFake
 </h1>
+<p align="center">No Fakes, Just Facts</p>
+</div>
 
 <div align="center">
   
