@@ -14,18 +14,23 @@
 </div>
 
 ## Overview
-This project focuses on building a deepfake image classification system for face images from Unsplash, a platform with billions of images. The goal is to determine whether an image is a deepfake or real, addressing the growing concern of manipulated media on such platforms.
+UnFake focuses on building a deepfake image classification system for mainly face and (noise:body) images from Unsplash, a platform with billions of images. The goal is to determine whether an image is a deepfake or real, addressing the growing concern of manipulated media on such platforms.
 
-The advent of deepfake technology, powered by advances in artificial intelligence and deep learning, has blurred the lines between reality and fabrication in digital media. Deepfakes, particularly image-based, pose significant threats to the authenticity of content on platforms like Unsplash, which hosts billions of images used for creative, professional, and personal purposes. The ability to create highly realistic manipulated images has implications for misinformation, trust, and legal integrity, necessitating robust detection systems. This project addresses this need by developing a classification system to identify whether Unsplash face images are deepfake or real, contributing to the broader effort to safeguard digital media authenticity.
+The advent of deepfake technology, powered by advances in artificial intelligence and deep learning, has blurred the lines between reality and fabrication in digital media. Deepfakes, particularly image-based, pose significant threats to the authenticity of content on platforms like Unsplash, which hosts billions of images used for creative, professional, and personal purposes. The ability to create highly realistic manipulated images has implications for misinformation, trust, and legal integrity, necessitating robust detection systems. We addresse this need by developing a classification system to identify whether Unsplash face images are deepfake or real, contributing to the broader effort to safeguard digital media authenticity.
 
 ## Scope of training
 * Dataset and Categories
   - The dataset comprises around 70,000 images scraped from Unsplash using its API, categorized into:
-* General Human Faces: Human face images.
-* Ethnic Diversity: Asian, Black, and Caucasian face images.
-* Facial Features: Bearded, freckles, wrinkled, and spectacles face images.
-* Age Variation: Child face images.
-* Pose & Composition: Close-up and headshot/portrait images.
+* General Human Faces:
+  - Human face images.
+* Ethnic Diversity:
+  -Asian,Black,Caucasian face images.
+* Facial Features:
+  -Bearded, freckles, wrinkled, and spectacles face images.
+* Age Variation:
+  -Child face images.
+* Pose & Composition:
+  -Close-up and headshot/portrait images.
 
 ### System Design
 ```txt
