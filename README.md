@@ -1,9 +1,8 @@
 <div>
 
-<h1 align='center'>
-  UnFake
-</h1>
-<p align="center">No Fakes, Just Facts</p>
+<div align="center">
+    <img src="https://github.com/negativenagesh/deep-fake/raw/main/UnFake-logo/vector/default.svg" alt="UnFake Logo" style="width: 500px; height: 500px;">
+</div>
 </div>
 
 <div align="center">
