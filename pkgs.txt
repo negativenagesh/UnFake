@@ -12,3 +12,4 @@ numpy
 selenium
 beautifulsoup4
 webdriver-manager
+streamlit
