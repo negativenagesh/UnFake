@@ -9,3 +9,6 @@ safetensors
 pillow
 opencv-python
 numpy
+selenium
+beautifulsoup4
+webdriver-manager
