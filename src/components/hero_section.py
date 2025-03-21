@@ -19,6 +19,7 @@ def render_hero_section():
         <div class="hero-buttons">
             <a href="#powerful_features" class="hero-button explore-btn" onclick="parent.location='#powerful_features'">Try Demo</a>
             <a href="#how_resumai_works" class="hero-button how-it-works-btn" onclick="parent.location='#how_resumai_works'">Learn More</a>
+            <a href="#how_resumai_works" class="hero-button how-it-works-btn" onclick="parent.location='#how_resumai_works'">Get Started</a>
         </div>
         <div class="hero-tags">
             <p>Powered by Unsplash API, Zyte, DNNS, computer vision</p>
