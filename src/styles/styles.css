@@ -339,6 +339,19 @@ html {
     font-size: 12px;
 }
 
+.selected-image {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+.selected-image img {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: block;
+}
+
 .why-resumai-container {
     padding: 70px 50px;
     color: white;
