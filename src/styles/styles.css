@@ -81,16 +81,18 @@ html {
     font-family: Montserrat, sans-serif, Inter, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Arial, sans-serif;
 }
 
-.hero-buttons {
-    margin-top: 20px;
+.hero-button.how-it-works-btn {
+    background-color: transparent;
+    color: white !important;
+    border: 2px solid white;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
 }
 
-.hero-button {
-    padding: 12px 24px;
-    font-size: 16px;
-    margin-right: 10px;
-    border-radius: 5px;
-    cursor: pointer;
+.hero-button.how-it-works-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
 }
 
 .explore-btn {
@@ -1784,21 +1786,38 @@ html {
     animation: none;
 }
 
-.stButton > button {
-    background: linear-gradient(90deg, #00ff00, #00cc00);
-    color: #1a1a1a;
-    font-weight: 600;
-    border-radius: 12px;
+/* Load More button styles */
+.stButton button[data-testid="baseButton-primary"] {
+    background: linear-gradient(90deg, #ff0000, #cc0000);
+    color: white;
+    font-weight: 500;
+    padding: 8px 20px;
+    font-size: 14px;
+    border-radius: 8px;
+    max-width: 150px;
+    margin: 0 auto;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
-    border: none !important;
+    box-shadow: 0 3px 8px rgba(255, 0, 0, 0.2);
+    border: none;
+    display: block;
 }
 
-.stButton > button:hover {
+.stButton button[data-testid="baseButton-primary"]:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 255, 0, 0.3);
+    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.3);
+    background: linear-gradient(90deg, #ff3333, #ff0000);
 }
 
+.stButton button[data-testid="baseButton-primary"]:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(255, 0, 0, 0.2);
+}
+
+/* Center load more button container */
+[data-testid="column"]:nth-child(2) .stButton {
+    display: flex;
+    justify-content: center;
+}
 .message-card-title {
     font-size: 1.5rem;
     font-weight: 700;
