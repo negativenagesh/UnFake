@@ -16,12 +16,11 @@ def render_hero_section():
         <p style="margin-top: 0;">authenticity across selected categories of Unsplash images</p>
         <div class="hero-buttons">
             <a href="#powerful_features" class="hero-button explore-btn" onclick="parent.location='#powerful_features'">Try Demo</a>
-            <a href="/?page=image_search" class="hero-button how-it-works-btn">Get Started</a>
+            <a href="/?page=image_scraper" class="hero-button how-it-works-btn" target="_blank">Get Started</a>
         </div>
         <div class="hero-tags">
             <p>Powered by Unsplash API, Zyte, DNNS, computer vision</p>
         </div>
     </div>
     """
-    
     return hero_html
