@@ -101,8 +101,8 @@ def main():
     params = st.query_params
     page = params.get("page", ["landing"])[0]
     
-    if page == "image_search":
-        render_image_search()
+    if page == "image_scraper" or page == "image_search":
+        show_image_search_page()
     else:
         show_landing_page()
 
