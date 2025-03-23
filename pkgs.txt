@@ -13,3 +13,5 @@ selenium
 beautifulsoup4
 webdriver-manager
 streamlit
+opencv-python 
+dlib
