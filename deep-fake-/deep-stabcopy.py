@@ -7,34 +7,36 @@ from pathlib import Path
 def process_images_to_deepfake(input_folder, output_folder):
     # Create output folder if it doesn't exist
     Path(output_folder).mkdir(parents=True, exist_ok=True)
-
+    
     # Load the pre-trained Stable Diffusion model
     model_id = "runwayml/stable-diffusion-v1-5"
     pipe = StableDiffusionImg2ImgPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
     pipe = pipe.to("cuda")  # Move the model to GPU
-
+    
     # Define the prompt and parameters
     prompt = (
-        "A photorealistic portrait of the person from the input image, preserving their clothing, pose, and background. "
-        "The image should feature soft, warm lighting with gentle shadows, clear and sharp details of the attire including a black sleeveless top "
-        "with a subtle camouflage pattern, realistic skin tones, and detailed hair tied back with loose strands. "
-        "The output should maintain a cinematic and intimate mood with high fidelity and lifelike presence."
+        "A hyper-detailed, ultra-realistic portrait of the person from the input image, photorealistic, 8K resolution, "
+        "exceptionally lifelike facial features with visible skin pores, subtle imperfections, and natural micro-textures, "
+        "intricate eye details with realistic iris patterns, light reflections, and depth, individual hair strands with natural sheen and flow, "
+        "soft cinematic lighting with delicate shadows and highlights, perfectly balanced color tones, "
+        "professional studio photography quality, razor-sharp focus, micro-details like faint freckles or fine wrinkles, "
+        "dynamic depth of field, rendered in the style of Unreal Engine 5 hyper-realism, trending on ArtStation, "
+        "no digital noise or artifacts, maximum fidelity, lifelike presence and emotional authenticity"
     )
 
     negative_prompt = (
-        "blurry, low resolution, pixelated, grainy, distorted, unrealistic, cartoonish, painterly, impressionistic, smudged, "
-        "dark shadows, muted colors, oversaturated, overexposed, underexposed, flat colors, dull, oversmoothed, overprocessed, "
-        "synthetic look, plastic texture, uncanny valley, bad anatomy, extra limbs, mutated hands, deformed face, disfigured, "
-        "poorly drawn eyes, poorly rendered skin, unnatural lighting, text, watermark, logo, signature, low quality, artifacts, amateurish"
+        "blurry, low resolution, pixelated, grainy, distorted, unrealistic, cartoonish, oversaturated, "
+        "overexposed, underexposed, flat colors, dull, oversmoothed, overprocessed, synthetic look, plastic texture, "
+        "uncanny valley, bad anatomy, extra limbs, mutated hands, deformed face, disfigured, poorly drawn eyes, "
+        "poorly rendered skin, unnatural lighting, text, watermark, logo, signature, low quality, artifacts, amateurish"
     )
 
-    strength = 0.6 # Reduced to preserve more of the original image
+    strength = 1.0  # Controls the influence of the input image on the output
     guidance_scale = 17.0  # Increased for stricter prompt adherence
-
+    
     # Process each image in the input folder
-    supported_extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.webp', '.tiff', '.heic', '.raw', '.svg',
-                            '.JPG', '.JPEG', '.PNG', '.BMP', '.WEBP', '.TIFF', '.HEIC', '.RAW', '.SVG')
-
+    supported_extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.webp', '.tiff', '.heic', '.raw', '.svg','.JPG', '.JPEG', '.PNG', '.BMP', '.WEBP', '.TIFF', '.HEIC', '.RAW', '.SVG')
+    
     for filename in os.listdir(input_folder):
         if filename.lower().endswith(supported_extensions):
             try:
@@ -42,10 +44,9 @@ def process_images_to_deepfake(input_folder, output_folder):
                 input_path = os.path.join(input_folder, filename)
                 input_image = Image.open(input_path).convert("RGB")
                 width, height = input_image.size
-                # Resize to 512x512 for Stable Diffusion
-                input_image = input_image.resize((512, 512), Image.LANCZOS)
-
-                # Generate the deepfake image
+                input_image = input_image.resize((width, height))
+                
+                # Generate the deep fake image
                 with torch.autocast("cuda"):
                     output_image = pipe(
                         prompt=prompt,
@@ -54,20 +55,17 @@ def process_images_to_deepfake(input_folder, output_folder):
                         guidance_scale=guidance_scale,
                         negative_prompt=negative_prompt
                     ).images[0]
-
-                # Resize back to original dimensions
-                output_image = output_image.resize((width, height), Image.LANCZOS)
-
+                
                 # Save the output image
                 output_filename = f"deepfake_{filename}"
                 output_path = os.path.join(output_folder, output_filename)
                 output_image.save(output_path)
-
+                
                 print(f"Processed {filename} -> Saved as {output_filename}")
-
+                
             except Exception as e:
                 print(f"Error processing {filename}: {str(e)}")
-
+    
     print("All images processed successfully!")
 
 # Example usage

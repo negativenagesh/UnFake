@@ -5,8 +5,6 @@ import os
 from pathlib import Path
 import numpy as np
 import cv2
-import face_recognition
-
 def process_images_to_deepfake(input_folder, output_folder):
     # Create output folder if it doesn't exist
     Path(output_folder).mkdir(parents=True, exist_ok=True)
@@ -32,8 +30,8 @@ def process_images_to_deepfake(input_folder, output_folder):
         "poorly rendered skin, unnatural lighting, text, watermark, logo, signature, low quality, artifacts"
     )
 
-    strength = 0.85  # Controls the influence of the input image on the output
-    guidance_scale = 12.0  # How closely to follow the prompt
+    strength = 0.8  # Controls the influence of the input image on the output
+    guidance_scale = 15.0  # How closely to follow the prompt
     
     # Process each image in the input folder
     supported_extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.webp', '.tiff', '.JPG', '.JPEG', '.PNG', '.BMP', '.WEBP', '.TIFF')
@@ -111,6 +109,6 @@ def process_images_to_deepfake(input_folder, output_folder):
 
 # Example usage
 if __name__ == "__main__":
-    input_folder = "/home/vu-lab03-pc24/Downloads/deep-fake/facerec"
-    output_folder = "/home/vu-lab03-pc24/Downloads/deep-fake/deep-fake-images"
+    input_folder = "/home/vu-lab03-pc24/Downloads/UnFake/images/oldman-face.jpeg"
+    output_folder = "/home/vu-lab03-pc24/Downloads/deep-fake/"
     process_images_to_deepfake(input_folder, output_folder)
