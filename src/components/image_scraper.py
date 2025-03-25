@@ -55,9 +55,6 @@ def show_image_search_page():
     </style>
     """, unsafe_allow_html=True)
     
-    # Title and search bar
-    st.markdown("<h1 style='text-align: center; color: #ff0000;'>Unsplash Image Search</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color: #cccccc;'>Search and browse images from Unsplash</p>", unsafe_allow_html=True)
     
     # Initialize session state
     if 'page_number' not in st.session_state:
@@ -73,13 +70,16 @@ def show_image_search_page():
     if 'last_search' not in st.session_state:
         st.session_state.last_search = ""
     
+    st.markdown("<br> </br>", unsafe_allow_html=True)
+
     # Search form
     with st.form(key="search_form"):
-        col1, col2 = st.columns([3, 1])
+        col1, col2 = st.columns([4, 0.5])
         with col1:
             search_term = st.text_input("Search for images", value=st.session_state.search_term)
         with col2:
             search_button = st.form_submit_button("Search", use_container_width=True)
+
         
         if search_button and search_term:
             st.session_state.search_term = search_term
