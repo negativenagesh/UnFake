@@ -19,3 +19,4 @@ webdriver-manager
 streamlit
 opencv-python 
 dlib
+tensorflow
