@@ -110,17 +110,5 @@ params = {
 * The headers include the authorization token.
 * The params dictionary specifies the search query and the number of images per page.
 
-## Face Detection and Extraction
-- To ensure the dataset consists of high-quality face images suitable for deepfake classification, this project employs a face detection and extraction pipeline. This process involves identifying and isolating faces from the scraped Unsplash images, which are then saved for further processing and model training
-
-1. Face Detection Model:
-- The project uses the face_recognition library, built on top of dlib’s state-of-the-art face recognition capabilities
-- Two detection methods are available: the Histogram of Oriented Gradients (HOG) and Convolutional Neural Network (CNN) models. The CNN model is preferred due to its higher accuracy and is configured to leverage GPU acceleration when available
-
-2. Image Processing Pipeline:
-- Input Handling: Images are loaded from a specified input folder. The pipeline supports a wide range of image formats, including .jpg, .jpeg, .png, .bmp, .webp, and .tiff.
-- Face Detection: For each image, the face detection model identifies the locations of faces using the configured method (HOG or CNN). If faces are detected, their coordinates are recorded.
-- Image Saving: All processed images are saved to an output folder with a standardized naming convention (img_<index>.<extension>), regardless of whether faces are detected. This ensures that the dataset remains intact for subsequent steps, even if an image contains no detectable faces.
-
 <div style=" border-radius: 10px; animation: fadeOutIn 2s infinite;"> <h2 style="color: #00d4ff;">License</h2> <p style="color: #b0b0b3;"> Resumai is licensed under the <a href="https://github.com/negativenagesh/deep-fake/blob/main/LICENSE">Apache License Version 2.0</a>. Feel free to use, modify, and share! ❤️ </p> 
 </div>
