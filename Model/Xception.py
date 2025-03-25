@@ -2,8 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-from tensorflow.keras.utils import load_img, img_to_array
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
 from tensorflow.keras.applications import Xception
 from tensorflow.keras.applications.xception import preprocess_input
 from tensorflow.keras.layers import GlobalAveragePooling2D, Dense
@@ -13,28 +12,32 @@ from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLRO
 from sklearn.model_selection import train_test_split
 from sklearn.utils.class_weight import compute_class_weight
 import matplotlib.pyplot as plt
+from PIL import Image
 
 # Set random seed for reproducibility
 tf.random.set_seed(42)
 np.random.seed(42)
 
+# Check GPU availability
 gpus = tf.config.list_physical_devices('GPU')
 if gpus:
     print(f"GPUs Available: {len(gpus)}")
     for gpu in gpus:
         print(f"GPU: {gpu}")
-        # Enable memory growth to prevent TensorFlow from allocating all GPU memory
-        tf.config.experimental.set_memory_growth(gpu, True)
+        try:
+            tf.config.experimental.set_memory_growth(gpu, True)
+        except RuntimeError as e:
+            print(e)
 else:
     print("No GPU detected. Running on CPU.")
 
-# Define paths to your dataset folders (update these paths as per your system)
+# Define paths to your dataset folders
 real_images_path = '/home/vu-lab03-pc24/Downloads/Real'
 fake_images_path = '/home/vu-lab03-pc24/Downloads/fake'
-
 transformed_real_path = '/home/vu-lab03-pc24/Downloads/Real_transformed'
 transformed_fake_path = '/home/vu-lab03-pc24/Downloads/Fake_transformed'
 
+# Create directories for transformed images if they don’t exist
 os.makedirs(transformed_real_path, exist_ok=True)
 os.makedirs(transformed_fake_path, exist_ok=True)
 
@@ -43,18 +46,12 @@ def transform_images(input_dir, output_dir, target_size=(299, 299)):
     Transform images from input directory, save to output directory,
     and return paths to transformed images.
     """
-    import os
-    from PIL import Image
-    from tensorflow.keras.utils import load_img
-    from tensorflow.keras.preprocessing.image import load_img
-    
     if not os.path.exists(input_dir):
         raise ValueError(f"Input directory does not exist: {input_dir}")
     
     print(f"Processing directory: {input_dir}")
     
     transformed_paths = []
-    # Get all image files from the directory
     valid_extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tiff')
     
     files = [f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f)) 
@@ -68,7 +65,6 @@ def transform_images(input_dir, output_dir, target_size=(299, 299)):
         
         # Load, resize, and save the image
         try:
-            # Using PIL directly for more control
             img = Image.open(img_path)
             img_resized = img.resize(target_size)
             img_resized.save(output_path)
@@ -79,6 +75,7 @@ def transform_images(input_dir, output_dir, target_size=(299, 299)):
     print(f"Successfully transformed {len(transformed_paths)} images from {input_dir} to {output_dir}")
     return transformed_paths
 
+# Transform images
 real_images_transformed = transform_images(real_images_path, transformed_real_path)
 fake_images_transformed = transform_images(fake_images_path, transformed_fake_path)
 
@@ -102,7 +99,7 @@ train_df['class'] = train_df['class'].astype(str)
 val_df['class'] = val_df['class'].astype(str)
 
 # Define image size and batch size
-img_height, img_width = 299, 299
+img_height, img_width = 299, 299  # Xception input size
 batch_size = 32
 
 # Data augmentation and preprocessing for training
@@ -273,6 +270,6 @@ plot_history(history, 'Initial Training')
 plot_history(history_fine, 'Fine-Tuning')
 
 # Example usage of prediction
-# test_image_path = 'path/to/test/image.jpg'
+# test_image_path = '/home/vu-lab03-pc24/Downloads/Real_transformed/sample_image.jpg'
 # result = predict_image(test_image_path, model)
 # print(f"Prediction for {test_image_path}: {result}")
