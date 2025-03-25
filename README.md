@@ -34,7 +34,7 @@ The advent of deepfake technology, powered by advances in artificial intelligenc
 
 ### System Design
 ```txt
-[User] --> [Frontend] --> [Backend] --> [Zyte API] --> [Unsplash]
+[User] --> [Frontend] --> [Backend] --> [Selenium] --> [Unsplash]
        |                  |            |
        |                  |            --> [Deepfake Model]
        |                  |--> [Classification Result]
