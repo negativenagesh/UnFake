@@ -2,6 +2,7 @@
 
 <div align="center">
     <img src="https://github.com/negativenagesh/UnFake/blob/main/UnFake-logo/logo.png" alt="UnFake Logo" style="width: 700px; height: 300px;">
+    <p>Real pics or AI tricks? We’ve got your back before you click!</p>
 </div>
 </div>
 
@@ -13,10 +14,37 @@
 ![GitHub license](https://img.shields.io/github/license/negativenagesh/deep-fake)
 </div>
 
-## Overview
-UnFake focuses on building a deepfake image classification system for mainly face and (noise:body) images from Unsplash, a platform with billions of images. The goal is to determine whether an image is a deepfake or real, addressing the growing concern of manipulated media on such platforms.
+## UnFake is the first platform to integrate a deepfake detection tool directly into the image-downloading process
 
-The advent of deepfake technology,  advances in artificial intelligence and deep learning, has blurred the lines between reality and fabrication in digital media. Deepfakes, particularly image-based, pose significant threats to the authenticity of content on platforms like Unsplash, which hosts billions of images used for creative, professional, and personal purposes. The ability to create highly realistic manipulated images has implications for misinformation, trust, and legal integrity, necessitating robust detection systems. We addresse this need by developing a classification system to identify whether Unsplash face images are deepfake or real, contributing to the broader effort to safeguard digital media authenticity.
+UnFake focuses on building a deepfake image classification system for mainly face and (noise:body) images from Unsplash, a platform with billions of images. The goal is to determine whether an image is a deepfake or real on Unsplash website, addressing the growing concern of manipulated media on such platforms. Billions of images flood platforms like Unsplash and Adobe Stock, yet none guarantee whether they’re real or AI-generated deepfakes. This lack of transparency leaves users vulnerable to misinformation, legal liabilities (e.g., copyright or defamation issues), and reputational damage.
+
+Unsplash, a prominent platform for free, high-quality images, has become a critical resource for a diverse user base, including marketers, designers, and educators. However, the rise of deepfake technology, leveraging advanced artificial intelligence and deep learning, poses significant challenges to the authenticity of digital media on such platforms. UnFake focuses on building a deepfake image classification system for Unsplash, particularly for face and body images, and examines the implications for users and the legal system.
+
+Unsplash, as described on its official website [Unsplash](https://unsplash.com/), hosts over 5 million photos and generates more than 13 billion photo impressions monthly, according to its Wikipedia entry [Unsplash - Wikipedia](https://en.wikipedia.org/wiki/Unsplash). It is a go-to resource for users seeking royalty-free images for various purposes, from creative projects to marketing campaigns. The platform's popularity, with over 330,000 contributing photographers, underscores its importance in digital media ecosystems. But Deepfake tech has blurred the lines between reality and fabrication, making it increasingly difficult to distinguish real images from manipulated ones.
+
+## Why UnFake Exists?: Reason to build this
+Unsplash, a platform hosting billions of images, faces the challenge of deepfake images, particularly those involving human faces and bodies. These AI-manipulated images pose a significant threat to the authenticity of digital media, impacting users who rely on Unsplash for creative and professional needs. The problem is to develop a deepfake image classification system that can accurately identify whether an image is real or a deepfake, thereby protecting users from potential harms such as misinformation, reputation damage, and legal liabilities.
+
+## Users of Unsplash and Similar Sites
+These users rely on Unsplash for its accessibility and quality, making the presence of deepfake images a significant concern. For instance, marketers using deepfake images in campaigns could face legal repercussions for misleading advertising, while educators might inadvertently use manipulated images in teaching materials, spreading misinformation.
+
+1. Designers and Creatives: For inspiration, mockups, and designs.
+2. Marketers and Advertisers: For campaigns, social media, and websites.
+3. Small Business Owners: For websites, blogs, and marketing materials.
+4. Individuals: For personal projects like collages or memes.
+5. Developers: For UI/UX design or placeholders.
+6. Educators: For teaching materials and presentations.
+
+
+## Legal and Judicial Implications
+Deepfake images can lead to:
+
+1. Copyright and Ownership Issues: Using someone's likeness without consent may violate publicity or privacy rights.
+2. Defamation and Libel: False portrayals can damage reputations, leading to legal action.
+3. Misleading Advertising: Using deepfakes in ads can breach advertising laws.
+4. Data Protection and Privacy: Creating deepfakes may violate data protection laws like GDPR.
+5. Criminal Offenses: In some jurisdictions, deepfakes, especially pornographic or harassing, can be criminal.
+6. Contractual Breaches: Uploading manipulated content may violate platform terms, risking penalties.
 
 ## Scope of training
 * Dataset and Categories
