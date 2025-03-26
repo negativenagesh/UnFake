@@ -3,7 +3,6 @@
 <div align="center">
     <img src="https://github.com/negativenagesh/UnFake/blob/main/UnFake-logo/logo.png" alt="UnFake Logo" style="width: 700px; height: 300px;">
     <p>Real pics or AI tricks? We’ve got your back before you click!</p>
-    <p>UnFake is the first platform to integrate a deepfake detection tool directly into the image-downloading process</p>
 </div>
 </div>
 
@@ -17,7 +16,7 @@
 
 ## Overview
 
-UnFake focuses on building a deepfake image classification system for mainly face and (noise:body) images from Unsplash, a platform with billions of images. The goal is to determine whether an image is a deepfake or real on Unsplash website, addressing the growing concern of manipulated media on such platforms. Billions of images flood platforms like Unsplash and Adobe Stock, yet none guarantee whether they’re real or AI-generated deepfakes. This lack of transparency leaves users vulnerable to misinformation, legal liabilities (e.g., copyright or defamation issues), and reputational damage.
+UnFake is the first platform to integrate a deepfake detection tool directly into the image-downloading process. UnFake focuses on building a deepfake image classification system for mainly face and (noise:body and whatever images came during scraping below types of images) images from Unsplash, a platform with billions of images. The goal is to determine whether an image is a deepfake or real on Unsplash website, addressing the growing concern of manipulated media on such platforms. Billions of images flood platforms like Unsplash and Adobe Stock, yet none guarantee whether they’re real or AI-generated deepfakes. This lack of transparency leaves users vulnerable to misinformation, legal liabilities (e.g., copyright or defamation issues), and reputational damage.
 
 Unsplash, a prominent platform for free, high-quality images, has become a critical resource for a diverse user base, including marketers, designers, and educators. However, the rise of deepfake technology, leveraging advanced artificial intelligence and deep learning, poses significant challenges to the authenticity of digital media on such platforms. UnFake focuses on building a deepfake image classification system for Unsplash, particularly for face and body images, and examines the implications for users and the legal system.
 
