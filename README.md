@@ -3,6 +3,7 @@
 <div align="center">
     <img src="https://github.com/negativenagesh/UnFake/blob/main/UnFake-logo/logo.png" alt="UnFake Logo" style="width: 700px; height: 300px;">
     <p>Real pics or AI tricks? We’ve got your back before you click!</p>
+    <p>UnFake is the first platform to integrate a deepfake detection tool directly into the image-downloading process</p>
 </div>
 </div>
 
@@ -14,7 +15,7 @@
 ![GitHub license](https://img.shields.io/github/license/negativenagesh/deep-fake)
 </div>
 
-### UnFake is the first platform to integrate a deepfake detection tool directly into the image-downloading process
+## Overview
 
 UnFake focuses on building a deepfake image classification system for mainly face and (noise:body) images from Unsplash, a platform with billions of images. The goal is to determine whether an image is a deepfake or real on Unsplash website, addressing the growing concern of manipulated media on such platforms. Billions of images flood platforms like Unsplash and Adobe Stock, yet none guarantee whether they’re real or AI-generated deepfakes. This lack of transparency leaves users vulnerable to misinformation, legal liabilities (e.g., copyright or defamation issues), and reputational damage.
 
