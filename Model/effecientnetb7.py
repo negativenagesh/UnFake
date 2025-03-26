@@ -84,7 +84,7 @@ class DeepfakeClassifier(nn.Module):
         super(DeepfakeClassifier, self).__init__()
         try:
             # Attempt to load pretrained weights
-            self.base_model = create_model('efficientnet_b7', pretrained=True, num_classes=0)
+            self.base_model = create_model('efficientnet_b7', pretrained=False, num_classes=0)
             print("Loaded pretrained EfficientNet-B7 weights.")
         except RuntimeError as e:
             print(f"Failed to load pretrained weights: {e}. Using random initialization.")
