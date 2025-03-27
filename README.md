@@ -63,13 +63,53 @@ Dataset and Categories
 
 ### System Design
 ```txt
-[User] --> [Frontend] --> [Backend] --> [Selenium] --> [Unsplash]
-       |                  |            |
-       |                  |            --> [Deepfake Model]
-       |                  |--> [Classification Result]
-       |--> [Search Query]
-       |--> [Image Click]
-       |--> [Classify Button Click]
++-------------------------------------------------------------+
+|                        [User] 👤                            |
+|   ① Clicks "Get Started"                                   |
+|   ② Searches Images, Views Details, Classifies             |
++-------------------------------------------------------------+
+              ↓ (HTTP Requests)
++-------------------------------------------------------------+
+|                  Frontend Layer (Streamlit App) 🌐          |
+|   +-------------------+   +-------------------+             |
+|   | Homepage          |-->| Search Page       |             |
+|   | - "Get Started"   |   | - Search Bar      |             |
+|   +-------------------+   +-------------------+             |
+|   +-------------------+   +-------------------+             |
+|   | Image Results     |-->| Details Page      |             |
+|   | - Unsplash Images |   | - Image Info      |             |
+|   | - "View Details"  |   | - "Classify" Btn  |             |
+|   +-------------------+   +-------------------+             |
++-------------------------------------------------------------+
+              ↓ (API Calls)
++-------------------------------------------------------------+
+	|                  Backend Layer ⚙️                         |
+|   +-------------------+   +-------------------+             |
+|   | /search Endpoint  |   | /classify Endpoint|             |
+|   | - Query Unsplash  |   | - Deepfake Check  |             |
+|   +-------------------+   +-------------------+             |
+|          ↓                        ↓                         |
+|   +-------------------+   +-------------------+             |
+|   | Unsplash API      |   | Deepfake Model    |             |
+|   | - Fetch Images    |   | - Process Image   |             |
+|   +-------------------+   +-------------------+             |
+|          ↓                        ↓                         |
+|   +-------------------+   +-------------------+             |
+|   |                   |   | Deepfake Model    |             |
+|   | - Store Images    |   | - Classify Image  |             |
+|   +-------------------+   +-------------------+             |
+|          ↓                        ↓                         |
+|   +-------------------+   +-------------------+             |
+|   | Image Results     |   | Classification    |             |
+|   | - URLs, Metadata  |   | - Real/Deepfake   |             |
+|   +-------------------+   +-------------------+             |
++-------------------------------------------------------------+
+              ↑ (Responses)
++-------------------------------------------------------------+
+|                        [User] 👤                            |
+|   Sees Images, Details, and Deepfake Results                |
++-------------------------------------------------------------+
+
 ```
 ### Landing page
 
