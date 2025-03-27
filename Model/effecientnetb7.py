@@ -39,13 +39,13 @@ class DeepfakeDataset(Dataset):
 # Define data transforms with reduced resolution
 data_transforms = {
     'train': transforms.Compose([
-        transforms.Resize((224, 224)),  # Reduced from 380x380 to save memory
+        transforms.Resize((600, 600)),  # Reduced from 380x380 to save memory
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
     'val': transforms.Compose([
-        transforms.Resize((224, 224)),
+        transforms.Resize((600, 600)),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
@@ -192,9 +192,9 @@ if __name__ == "__main__":
     test_dataset = DeepfakeDataset(test_paths, test_labels, data_transforms['val'])
     
     # Reduced batch size to prevent OOM
-    train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True, num_workers=4)
-    val_loader = DataLoader(val_dataset, batch_size=4, shuffle=False, num_workers=4)
-    test_loader = DataLoader(test_dataset, batch_size=4, shuffle=False, num_workers=4)
+    train_loader = DataLoader(train_dataset, batch_size=2, shuffle=True, num_workers=4)
+    val_loader = DataLoader(val_dataset, batch_size=2, shuffle=False, num_workers=4)
+    test_loader = DataLoader(test_dataset, batch_size=2, shuffle=False, num_workers=4)
     
     # Initialize model, loss, and optimizer
     model = DeepfakeClassifier().to(device)
