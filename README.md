@@ -47,8 +47,9 @@ Deepfake images can lead to:
 6. Contractual Breaches: Uploading manipulated content may violate platform terms, risking penalties.
 
 ## Scope of training
-* Dataset and Categories
-  - The dataset comprises around 70,000 images scraped from Unsplash using its API, categorized into:
+Dataset and Categories
+  - The dataset comprises around 75,000 images scraped from Unsplash using its API and rest from publically available datasets(with deepfake images and some are generated using stable diffusion),  categorized into:
+
 * General Human Faces:
   - Human face images.
 * Ethnic Diversity:
