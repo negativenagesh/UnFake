@@ -25,6 +25,13 @@ Unsplash, as described on its official website [Unsplash](https://unsplash.com/)
 ## Why UnFake Exists?: Reason to build this
 Unsplash, a platform hosting billions of images, faces the challenge of deepfake images, particularly those involving human faces and bodies. These AI-manipulated images pose a significant threat to the authenticity of digital media, impacting users who rely on Unsplash for creative and professional needs. The problem is to develop a deepfake image classification system that can accurately identify whether an image is real or a deepfake, thereby protecting users from potential harms such as misinformation, reputation damage, and legal liabilities.
 
+### Main Page
+
+<div align="center">
+	
+![image](https://github.com/user-attachments/assets/95f39515-2854-4576-8732-2b2863f0d6b5)
+</div>
+
 ### Demo (Click on image to watch video):
 
 <div align="center">
@@ -69,6 +76,9 @@ Dataset and Categories
   -Close-up and headshot/portrait images.
 
 ### System Design
+
+<div align="center">
+	
 ```txt
 +-------------------------------------------------------------+
 |                        [User] 👤                            |
@@ -116,13 +126,7 @@ Dataset and Categories
 |                        [User] 👤                            |
 |   Sees Images, Details, and Deepfake Results                |
 +-------------------------------------------------------------+
-
 ```
-### Landing page
-
-<div align="center">
-    
-![image](https://github.com/user-attachments/assets/1ccafe98-7c28-4b0a-858f-5de4da3a7f0a)
 </div>
 
 ## ⚙️ Setup
