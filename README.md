@@ -48,7 +48,7 @@ Deepfake images can lead to:
 
 ## Scope of training
 Dataset and Categories
-  - The dataset comprises around 75,000 images scraped from Unsplash using its API and rest from publically available datasets(with deepfake images and some are generated using stable diffusion),  categorized into:
+  - The dataset comprises around 2,50,000 in which around 76,000 images are scraped from Unsplash using its API and rest from publically available datasets(with deepfake images and some are generated using stable diffusion) and the images are categorized into:
 
 * General Human Faces:
   - Human face images.
