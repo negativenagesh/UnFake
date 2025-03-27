@@ -29,7 +29,7 @@ Unsplash, a platform hosting billions of images, faces the challenge of deepfake
 
 <div align="center">
   <a href="https://drive.google.com/file/d/1Du6u_1jxerVEeP3ZST4kDoONDGW7i9di/view?usp=sharing">
-    <img src="https://imgur.com/EtWp5hO.jpg" alt="Resume review video preview" width="600" style="display:inline-block; margin:10px;">
+    <img src="https://imgur.com/EtWp5hO.jpg" alt="Resume review video preview" width="800" style="display:inline-block; margin:10px;">
 </div>
 
 ## Users of Unsplash and Similar Sites
