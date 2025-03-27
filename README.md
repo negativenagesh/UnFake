@@ -25,6 +25,13 @@ Unsplash, as described on its official website [Unsplash](https://unsplash.com/)
 ## Why UnFake Exists?: Reason to build this
 Unsplash, a platform hosting billions of images, faces the challenge of deepfake images, particularly those involving human faces and bodies. These AI-manipulated images pose a significant threat to the authenticity of digital media, impacting users who rely on Unsplash for creative and professional needs. The problem is to develop a deepfake image classification system that can accurately identify whether an image is real or a deepfake, thereby protecting users from potential harms such as misinformation, reputation damage, and legal liabilities.
 
+### Demo (Click on image to watch video):
+
+<div align="center">
+  <a href="https://drive.google.com/file/d/1Du6u_1jxerVEeP3ZST4kDoONDGW7i9di/view?usp=sharing">
+    <img src="https://imgur.com/a/PHtJCjV.jpg" alt="Resume review video preview" width="400" style="display:inline-block; margin:10px;">
+</div>
+
 ## Users of Unsplash and Similar Sites
 These users rely on Unsplash for its accessibility and quality, making the presence of deepfake images a significant concern. For instance, marketers using deepfake images in campaigns could face legal repercussions for misleading advertising, while educators might inadvertently use manipulated images in teaching materials, spreading misinformation.
 
