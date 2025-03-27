@@ -28,8 +28,8 @@ def process_images_to_deepfake(input_folder, output_folder):
         "poorly drawn eyes, poorly rendered skin, unnatural lighting, text, watermark, logo, signature, low quality, artifacts, amateurish"
     )
 
-    strength = 0.6 # Reduced to preserve more of the original image
-    guidance_scale = 17.0  # Increased for stricter prompt adherence
+    strength = 0.4 # Reduced to preserve more of the original image
+    guidance_scale = 15.0  # Increased for stricter prompt adherence
 
     # Process each image in the input folder
     supported_extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.webp', '.tiff', '.heic', '.raw', '.svg',
@@ -72,6 +72,6 @@ def process_images_to_deepfake(input_folder, output_folder):
 
 # Example usage
 if __name__ == "__main__":
-    input_folder = "/home/vu-lab03-pc24/Downloads/image_folders/blackface-images"
-    output_folder = "/home/vu-lab03-pc24/Downloads/deepfakeimg/blkdf"
+    input_folder = "/home/vu-lab03-pc24/Downloads/image_folders/closeup-face-images"
+    output_folder = "/home/vu-lab03-pc24/Downloads/deepfakeimg/clsup"
     process_images_to_deepfake(input_folder, output_folder)
