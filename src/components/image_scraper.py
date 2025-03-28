@@ -114,6 +114,9 @@ def show_image_search_page():
                         st.image(img['display_url'], caption=f"By: {img['author_name']} (@{img['author_username']})", use_container_width=True)
                         if st.button("View Details", key=f"view_{img['id']}_1"):
                             st.session_state.selected_image = img
+                            # Reset fake detection result when selecting a new image
+                            if 'fake_detection_result' in st.session_state:
+                                st.session_state.fake_detection_result = None
                             st.session_state.page = "details"
                             st.query_params["page"] = "details"
                             st.rerun()
@@ -127,6 +130,9 @@ def show_image_search_page():
                         st.image(img['display_url'], caption=f"By: {img['author_name']} (@{img['author_username']})", use_container_width=True)
                         if st.button("View Details", key=f"view_{img['id']}_2"):
                             st.session_state.selected_image = img
+                            # Reset fake detection result when selecting a new image
+                            if 'fake_detection_result' in st.session_state:
+                                st.session_state.fake_detection_result = None
                             st.session_state.page = "details"
                             st.query_params["page"] = "details"
                             st.rerun()
@@ -213,6 +219,9 @@ def show_image_details_page():
     if 'selected_image' not in st.session_state or st.session_state.selected_image is None:
         st.error("No image selected. Please go back and select an image.")
         if st.button("Back to Search", key="back_btn_top"):
+            # Reset fake detection result when going back
+            if 'fake_detection_result' in st.session_state:
+                st.session_state.fake_detection_result = None
             st.session_state.page = "image_scraper"
             st.query_params["page"] = "image_search"
             st.rerun()
@@ -232,6 +241,15 @@ def show_image_details_page():
     
     # Image
     st.image(selected['display_url'], use_container_width=True)
+    
+    # Back button above the DeepFake check button
+    if st.button("Back to Search", key="back_btn_top"):
+        # Reset fake detection result when going back
+        if 'fake_detection_result' in st.session_state:
+            st.session_state.fake_detection_result = None
+        st.session_state.page = "image_scraper"
+        st.query_params["page"] = "image_search"
+        st.rerun()
     
     # DeepFake check button below the image
     if st.button("Check if DeepFake", use_container_width=True, type="primary", key="deepfake_btn"):
@@ -285,6 +303,9 @@ def show_image_details_page():
     
     # Back button at the bottom
     if st.button("Back to Search", key="back_btn_bottom"):
+        # Reset fake detection result when going back
+        if 'fake_detection_result' in st.session_state:
+            st.session_state.fake_detection_result = None
         st.session_state.page = "image_scraper"
         st.query_params["page"] = "image_search"
         st.rerun()
