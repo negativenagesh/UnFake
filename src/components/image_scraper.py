@@ -167,15 +167,14 @@ def show_image_search_page():
 def show_image_details_page():
     """Display the details of the selected image."""
     # Custom CSS for the details page
-# Custom CSS for the details page
     st.markdown("""
     <style>
     .selected-image {
         margin-top: 20px;
         padding: 20px;
-        background-color: #f9f9f9;
+        background-color: #1a1a1a;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     .selected-image img {
         width: 100%;
@@ -187,7 +186,7 @@ def show_image_details_page():
     .selected-image-details {
         margin-top: 15px;
         font-size: 16px;
-        color: #333333;
+        color: #cccccc;
     }
     .selected-image-details strong {
         color: #ff0000;
@@ -213,7 +212,7 @@ def show_image_details_page():
     # Check if a selected image exists
     if 'selected_image' not in st.session_state or st.session_state.selected_image is None:
         st.error("No image selected. Please go back and select an image.")
-        if st.button("Back to Search"):
+        if st.button("Back to Search", key="back_btn_top"):
             st.session_state.page = "image_scraper"
             st.query_params["page"] = "image_search"
             st.rerun()
@@ -226,75 +225,53 @@ def show_image_details_page():
     # Display the selected image and its details
     selected = st.session_state.selected_image
     
-    # Create two columns for layout
-    col1, col2 = st.columns([3, 1])
-    
-    with col1:
-        st.markdown("<div class='selected-image'>", unsafe_allow_html=True)
-        st.subheader("Image Details")
-        st.image(selected['display_url'], use_container_width=True)
-        st.markdown("<div class='selected-image-details'>", unsafe_allow_html=True)
-        st.write(f"**Alt Text:** {selected.get('alt_text', 'N/A')}")
-        st.write(f"**Photographer:** {selected.get('author_name', 'N/A')} (@{selected.get('author_username', 'N/A')})")
-        st.write(f"**Dimensions:** {selected.get('width', 'N/A')} x {selected.get('height', 'N/A')}")
-        st.write(f"**Created At:** {selected.get('created_at', 'N/A')}")
-        st.write(f"**Likes:** {selected.get('likes', 'N/A')}")
-        st.write(f"**Dominant Color:** {selected.get('color', 'N/A')}")
-        st.markdown(f"[Download Full Resolution]({selected.get('download_url', '#')})")
-        st.markdown("</div>", unsafe_allow_html=True)
-        st.markdown("</div>", unsafe_allow_html=True)
-    
-    # Right column for fake detection button
-    with col2:
-        if st.button("Check if DeepFake", use_container_width=True, type="primary"):
-            with st.spinner("Analyzing image..."):
-                try:
-                    # Import the backend function for fake detection
-                    from backend.deepfake_detection import analyze_image_for_streamlit
-                    
-                    # Call the safe wrapper function
-                    image_url = selected['display_url']
-                    result = analyze_image_for_streamlit(image_url)
-                    
-                    # Store the result in session state
-                    st.session_state.fake_detection_result = result
-                    st.rerun()  # Rerun to display the result
-                    
-                except Exception as e:
-                    st.error(f"Error during fake detection: {str(e)}")
-                    import traceback
-                    st.exception(traceback.format_exc())
-        
-        # Display fake detection result if available
-        if st.session_state.fake_detection_result is not None:
-            result = st.session_state.fake_detection_result
-            is_fake = result.get("is_fake", False)
-            confidence = result.get("confidence", 0.0)
-            message = result.get("message", "")
-            
-            st.markdown("### Analysis Result")
-            if is_fake:
-                st.error(f"⚠️ This image appears to be **FAKE**")
-            else:
-                st.success(f"✅ This image appears to be **REAL**")
-            
-            st.metric("Confidence", f"{confidence*100:.1f}%")
-            
-            if message:
-                st.info(message)
-    
-    # Back button
-    if st.button("Back to Search"):
-        st.session_state.page = "image_scraper"
-        st.query_params["page"] = "image_search"
-        st.rerun()
-        return
-    
-    # Display the selected image and its details
-    selected = st.session_state.selected_image
-    st.markdown("<div class='selected-image'>", unsafe_allow_html=True)
     st.subheader("Image Details")
+    
+    # Single column layout for the image and details
+    st.markdown("<div class='selected-image'>", unsafe_allow_html=True)
+    
+    # Image
     st.image(selected['display_url'], use_container_width=True)
+    
+    # DeepFake check button below the image
+    if st.button("Check if DeepFake", use_container_width=True, type="primary", key="deepfake_btn"):
+        with st.spinner("Analyzing image..."):
+            try:
+                # Import the backend function for fake detection
+                from backend.deepfake_detection import analyze_image_for_streamlit
+                
+                # Call the safe wrapper function
+                image_url = selected['display_url']
+                result = analyze_image_for_streamlit(image_url)
+                
+                # Store the result in session state
+                st.session_state.fake_detection_result = result
+                st.rerun()  # Rerun to display the result
+                
+            except Exception as e:
+                st.error(f"Error during fake detection: {str(e)}")
+                import traceback
+                st.exception(traceback.format_exc())
+    
+    # Display fake detection result if available
+    if st.session_state.fake_detection_result is not None:
+        result = st.session_state.fake_detection_result
+        is_fake = result.get("is_fake", False)
+        confidence = result.get("confidence", 0.0)
+        message = result.get("message", "")
+        
+        st.markdown("### Analysis Result")
+        if is_fake:
+            st.error(f"⚠️ This image appears to be **FAKE**")
+        else:
+            st.success(f"✅ This image appears to be **REAL**")
+        
+        st.metric("Confidence", f"{confidence*100:.1f}%")
+        
+        if message:
+            st.info(message)
+    
+    # Image details
     st.markdown("<div class='selected-image-details'>", unsafe_allow_html=True)
     st.write(f"**Alt Text:** {selected.get('alt_text', 'N/A')}")
     st.write(f"**Photographer:** {selected.get('author_name', 'N/A')} (@{selected.get('author_username', 'N/A')})")
@@ -304,11 +281,10 @@ def show_image_details_page():
     st.write(f"**Dominant Color:** {selected.get('color', 'N/A')}")
     st.markdown(f"[Download Full Resolution]({selected.get('download_url', '#')})")
     st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
     
-    # Back button
-    if st.button("Back to Search"):
+    # Back button at the bottom
+    if st.button("Back to Search", key="back_btn_bottom"):
         st.session_state.page = "image_scraper"
         st.query_params["page"] = "image_search"
         st.rerun()
-    
-    st.markdown("</div>", unsafe_allow_html=True)

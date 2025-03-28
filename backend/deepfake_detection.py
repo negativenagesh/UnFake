@@ -40,12 +40,29 @@ def load_model():
     """Load the pretrained deepfake detection model."""
     global DEMO_MODE
     
-    # Define model path
-    model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../Model/efficientnet_b7_deepfake.pth")
+    # Try multiple possible model paths
+    possible_paths = [
+        # Direct absolute path
+        "/home/subrahmanya/projects/UnFake/Model/efficientnet_b7_deepfake.pth",
+        
+        # Relative path from current file
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "../Model/efficientnet_b7_deepfake.pth"),
+        
+        # Check in the same directory as the script
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "efficientnet_b7_deepfake.pth")
+    ]
     
-    # Check if model exists
-    if not os.path.exists(model_path):
-        print(f"Model file not found at {model_path}, using demo mode")
+    # Try each path
+    model_path = None
+    for path in possible_paths:
+        if os.path.exists(path):
+            model_path = path
+            print(f"Found model at: {model_path}")
+            break
+    
+    # If no model found, use demo mode
+    if model_path is None:
+        print(f"Model file not found, tried: {possible_paths}, using demo mode")
         DEMO_MODE = True
         return None
     
@@ -161,6 +178,8 @@ def deepfake_detection(image_url, confidence_threshold=0.5):
 def analyze_image_for_streamlit(image_url):
     """Safe wrapper for Streamlit to avoid event loop conflicts"""
     try:
+        # Streamlit and PyTorch have threading/asyncio conflicts
+        # This is a simplified approach to minimize those issues
         return deepfake_detection(image_url)
     except Exception as e:
         print(f"Error in analyze_image_for_streamlit: {str(e)}")

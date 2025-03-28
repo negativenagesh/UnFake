@@ -8,9 +8,14 @@ from src.components.navbar import render_navbar
 from src.components.hero_section import render_hero_section
 from src.components.face_detection_preview import render_deepfake_detection
 from src.components.image_scraper import show_image_search_page, show_image_details_page
+from src.components.properties import render_about_section
+from src.components.mission_section import render_mission_section
+from src.components.dataset_section import render_dataset_section
+from src.components.use_cases_section import render_use_cases_section
+from src.components.footer import render_footer
 
 def show_custom_landing_page():
-    """Render the landing page."""
+    """Render the landing page with the new Footer section."""
     # Page styling
     st.markdown(
         """
@@ -22,7 +27,6 @@ def show_custom_landing_page():
             background-color: #262626;
             background: radial-gradient(circle, rgba(38, 38, 38, 0.8) 0%, rgba(30, 30, 30, 0.6) 50%, #262626 100%);
         }
-        /* Smooth scrolling for anchor links */
         html {
             scroll-behavior: smooth;
         }
@@ -36,18 +40,14 @@ def show_custom_landing_page():
     # Load custom CSS
     with open("src/styles/styles.css") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-    
-    # Add an ID for the hero container
+
+    # Hero section
     st.markdown('<div id="hero-section"></div>', unsafe_allow_html=True)
-
-    # Two columns for layout
     col1, col2 = st.columns([1, 1])
-
     with col1:
         st.markdown('<div style="height: 20px;"></div>', unsafe_allow_html=True)
         hero_html = render_hero_section()
         st.markdown(hero_html, unsafe_allow_html=True)
-
     with col2:
         st.markdown('<div style="height: 20px;"></div>', unsafe_allow_html=True)
         face_detection_html = render_deepfake_detection()
@@ -70,7 +70,27 @@ def show_custom_landing_page():
         """,
         unsafe_allow_html=True
     )
-    # Keep other sections as needed
+
+    # About UnFake section
+    st.markdown('<div id="about"></div>', unsafe_allow_html=True)
+    about_html = render_about_section()
+    st.markdown(about_html, unsafe_allow_html=True)
+
+    # Our Mission section
+    mission_html = render_mission_section()
+    st.markdown(mission_html, unsafe_allow_html=True)
+
+    # Our Dataset section
+    dataset_html = render_dataset_section()
+    st.markdown(dataset_html, unsafe_allow_html=True)
+
+    # Use Cases section
+    use_cases_html = render_use_cases_section()
+    st.markdown(use_cases_html, unsafe_allow_html=True)
+
+    # Footer section (new)
+    footer_html = render_footer()
+    st.markdown(footer_html, unsafe_allow_html=True)
 
 def setup_page_styling():
     """Apply shared styling for all pages."""
@@ -89,7 +109,6 @@ def setup_page_styling():
         unsafe_allow_html=True
     )
     render_navbar()
-    
     with open("src/styles/styles.css") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
@@ -98,19 +117,13 @@ def main():
     params = st.query_params
     page = params.get("page", ["landing"])[0]
     
-    # For debugging in terminal:
-    print(f"Current page parameter: {page}")
-    
     if page == "image_scraper" or page == "image_search":
-        print("Loading image search page...")
         setup_page_styling()
         show_image_search_page()
     elif page == "details":
-        print("Loading details page...")
         setup_page_styling()
         show_image_details_page()
     else:
-        print("Loading landing page...")
         show_custom_landing_page()
 
 if __name__ == "__main__":

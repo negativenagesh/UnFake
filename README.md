@@ -25,6 +25,20 @@ Unsplash, as described on its official website [Unsplash](https://unsplash.com/)
 ## Why UnFake Exists?: Reason to build this
 Unsplash, a platform hosting billions of images, faces the challenge of deepfake images, particularly those involving human faces and bodies. These AI-manipulated images pose a significant threat to the authenticity of digital media, impacting users who rely on Unsplash for creative and professional needs. The problem is to develop a deepfake image classification system that can accurately identify whether an image is real or a deepfake, thereby protecting users from potential harms such as misinformation, reputation damage, and legal liabilities.
 
+### Main Page
+
+<div align="center">
+	
+![image](https://github.com/user-attachments/assets/95f39515-2854-4576-8732-2b2863f0d6b5)
+</div>
+
+### Demo (Click on image to watch video):
+
+<div align="center">
+  <a href="https://drive.google.com/file/d/1Du6u_1jxerVEeP3ZST4kDoONDGW7i9di/view?usp=sharing">
+    <img src="https://imgur.com/EtWp5hO.jpg" alt="deepfake detection demo" width="800" style="display:inline-block; margin:10px;">
+</div>
+
 ## Users of Unsplash and Similar Sites
 These users rely on Unsplash for its accessibility and quality, making the presence of deepfake images a significant concern. For instance, marketers using deepfake images in campaigns could face legal repercussions for misleading advertising, while educators might inadvertently use manipulated images in teaching materials, spreading misinformation.
 
@@ -47,8 +61,9 @@ Deepfake images can lead to:
 6. Contractual Breaches: Uploading manipulated content may violate platform terms, risking penalties.
 
 ## Scope of training
-* Dataset and Categories
-  - The dataset comprises around 70,000 images scraped from Unsplash using its API, categorized into:
+Dataset and Categories
+  - The dataset comprises around 2,50,000 in which around 76,000 images are scraped from Unsplash using its API and rest from publically available datasets(with deepfake images and some are generated using stable diffusion) and the images are categorized into:
+
 * General Human Faces:
   - Human face images.
 * Ethnic Diversity:
@@ -61,20 +76,57 @@ Deepfake images can lead to:
   -Close-up and headshot/portrait images.
 
 ### System Design
-```txt
-[User] --> [Frontend] --> [Backend] --> [Selenium] --> [Unsplash]
-       |                  |            |
-       |                  |            --> [Deepfake Model]
-       |                  |--> [Classification Result]
-       |--> [Search Query]
-       |--> [Image Click]
-       |--> [Classify Button Click]
-```
-### Landing page
 
 <div align="center">
-    
-![image](https://github.com/user-attachments/assets/1ccafe98-7c28-4b0a-858f-5de4da3a7f0a)
+	
+```txt
++-------------------------------------------------------------+
+|                        [User] 👤                            |
+|   ① Clicks "Get Started"                                   |
+|   ② Searches Images, Views Details, Classifies             |
++-------------------------------------------------------------+
+              ↓ (HTTP Requests)
++-------------------------------------------------------------+
+|                  Frontend Layer (Streamlit App) 🌐          |
+|   +-------------------+   +-------------------+             |
+|   | Homepage          |-->| Search Page       |             |
+|   | - "Get Started"   |   | - Search Bar      |             |
+|   +-------------------+   +-------------------+             |
+|   +-------------------+   +-------------------+             |
+|   | Image Results     |-->| Details Page      |             |
+|   | - Unsplash Images |   | - Image Info      |             |
+|   | - "View Details"  |   | - "Classify" Btn  |             |
+|   +-------------------+   +-------------------+             |
++-------------------------------------------------------------+
+              ↓ (API Calls)
++-------------------------------------------------------------+
+	|                  Backend Layer ⚙️                         |
+|   +-------------------+   +-------------------+             |
+|   | /search Endpoint  |   | /classify Endpoint|             |
+|   | - Query Unsplash  |   | - Deepfake Check  |             |
+|   +-------------------+   +-------------------+             |
+|          ↓                        ↓                         |
+|   +-------------------+   +-------------------+             |
+|   | Unsplash API      |   | Deepfake Model    |             |
+|   | - Fetch Images    |   | - Process Image   |             |
+|   +-------------------+   +-------------------+             |
+|          ↓                        ↓                         |
+|   +-------------------+   +-------------------+             |
+|   |                   |   | Deepfake Model    |             |
+|   | - Store Images    |   | - Classify Image  |             |
+|   +-------------------+   +-------------------+             |
+|          ↓                        ↓                         |
+|   +-------------------+   +-------------------+             |
+|   | Image Results     |   | Classification    |             |
+|   | - URLs, Metadata  |   | - Real/Deepfake   |             |
+|   +-------------------+   +-------------------+             |
++-------------------------------------------------------------+
+              ↑ (Responses)
++-------------------------------------------------------------+
+|                        [User] 👤                            |
+|   Sees Images, Details, and Deepfake Results                |
++-------------------------------------------------------------+
+```
 </div>
 
 ## ⚙️ Setup
