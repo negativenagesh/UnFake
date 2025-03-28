@@ -175,7 +175,7 @@ params = {
 * The headers include the authorization token.
 * The params dictionary specifies the search query and the number of images per page.
 
-## Model Training:
+## Model Architecture
 
 1. Scope of dataset:
 
