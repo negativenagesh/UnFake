@@ -115,7 +115,12 @@ def setup_page_styling():
 def main():
     """Main function to determine which page to display."""
     params = st.query_params
-    page = params.get("page", ["landing"])[0]
+    page = params.get("page", "landing")
+    
+    # Clear analysis state when changing pages
+    if page != "details" and 'analysis_performed' in st.session_state:
+        st.session_state.analysis_performed = False
+        st.session_state.analysis_results = None
     
     if page == "image_scraper" or page == "image_search":
         setup_page_styling()
