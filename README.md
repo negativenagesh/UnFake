@@ -175,7 +175,7 @@ params = {
 * The headers include the authorization token.
 * The params dictionary specifies the search query and the number of images per page.
 
-## Model Training:
+## Model Architecture
 
 1. Scope of dataset:
 
@@ -212,7 +212,135 @@ Dataset and Categories
   * val Pipeline:
     * Includes only Resize, ToTensor, and Normalize, ensuring consistent evaluation without random augmentations.
 
+3. Dataset Loading:
+* Purpose: Loads image paths and labels from separate directories for real and fake images, then splits them into training, validation, and test sets.
 
+  * Details:
+	* Input: Takes real_dir and fake_dir as directory paths containing real and fake images, respectively.
+	* Validation: Checks if directories exist and contain files, raising ValueError if not.
+	* Image Collection: Uses list comprehensions to gather full file paths for images in each directory.
+	* Label Assignment: Assigns 0 to real images and 1 to fake images.
+
+  * Data Splitting:
+	* First train_test_split: Splits data into 70% training (train_paths, train_labels) and 30% temporary (temp_paths, temp_labels), with stratify=labels to maintain class balance.
+	* Second train_test_split: Splits the temporary set into 15% validation and 15% test sets, again with stratification.
+	* Output: Returns six lists: paths and labels for training, validation, and test sets.
+
+4. Model Definition:
+
+* Purpose: Defines the neural network architecture for deepfake classification using EfficientNet-B7 as the backbone.
+	
+  * Details:
+	* Inheritance: Inherits from nn.Module, PyTorch's base class for neural networks.
+	* __init__(self, num_classes=2):
+		* Attempts to load a pre-trained EfficientNet-B7 model using timm.create_model() with pretrained=True and num_classes=0 (removing the original classifier head).
+		* Falls back to random initialization if pre-trained weights fail to load (e.g., due to network issues).
+		* Adds a Dropout(0.3) layer for regularization (30% dropout rate) and a fully connected layer (fc) mapping 2560 features (EfficientNet-B7 output size) to num_classes (2: real or fake).
+	* forward(self, x):
+		* Passes input tensor x through the base model, applies dropout, and outputs logits via the fully connected layer.
+  * Components
+	* Base Model: EfficientNet-B7
+		* Role: Acts as the feature extractor, processing raw input images into a high-dimensional feature vector that captures hierarchical patterns and details.
+		* Pretrained Weights: The model attempts to load weights pre-trained on ImageNet (pretrained=True) to benefit from transfer learning, which provides a strong starting point for feature extraction. If this fails 		(e.g., due to a network issue), it falls back to random initialization (pretrained=False).
+		* Modification: The original classification head of EfficientNet-B7 is removed by setting num_classes=0 in create_model, allowing a custom head to be added for the deepfake detection task.
+	* Dropout Layer:
+		* Role: A regularization layer with a dropout rate of 0.3 (30% of inputs are randomly set to zero during training) to prevent overfitting and improve the model’s generalization to unseen data.
+	* Fully Connected Layer:
+		* Role: A linear layer (nn.Linear) that takes the 2560-dimensional feature vector from EfficientNet-B7 and maps it to a 2-dimensional output, corresponding to the two classes (real and fake).
+	* Forward Pass:
+		* Input: A batch of images represented as tensors (e.g., shape [batch_size, channels, height, width]).
+	* Processing:
+		* The input tensor passes through the EfficientNet-B7 base model, which outputs a 2560-dimensional feature vector for each image.
+		* The feature vector is processed by the dropout layer, randomly dropping 30% of the values during training to enhance robustness.
+		* The resulting vector is fed into the fully connected layer, producing logits (raw scores) for the two classes.
+		* Output: A tensor of shape [batch_size, 2] containing logits, which can be converted to probabilities using a softmax function during inference.
+
+   * Architecture of EfficientNet-B7
+	* EfficientNet-B7 is a convolutional neural network (CNN) from the EfficientNet family, designed to achieve high accuracy with fewer parameters and computational resources compared to traditional models. It uses a compound scaling method and advanced building blocks to optimize performance.
+
+	* Key Concepts
+		* Compound Scaling: EfficientNet scales three dimensions of a baseline model (EfficientNet-B0)—depth (number of layers), width (number of channels), and resolution (input image size)—using a compound scaling formula. For EfficientNet-B7, this results in a deeper, wider network with a higher input resolution (600x600) compared to B0 (224x224).
+		* MBConv Blocks: The primary building block is the Mobile Inverted Bottleneck Convolution (MBConv), an efficient version of the inverted residual block from MobileNetV2. It reduces computation using depthwise separable convolutions.
+		* Squeeze-and-Excitation (SE) Modules: Integrated into MBConv blocks, SE modules enhance feature representation by recalibrating channel-wise responses, allowing the model to focus on the most relevant features.
+
+```txt
+High-Level Architecture Diagram
+
+Input Image (600x600x3)
+│
+├─→ Conv3x3, 64 channels, stride 2
+│
+├─→ MBConv1, 64 channels
+│
+├─→ MBConv6, 80 channels (repeated layers)
+│
+├─→ MBConv6, 112 channels (repeated layers)
+│
+├─→ MBConv6, 160 channels (repeated layers)
+│
+├─→ MBConv6, 192 channels (repeated layers)
+│
+├─→ MBConv6, 224 channels (repeated layers)
+│
+├─→ MBConv6, 384 channels (repeated layers)
+│
+├─→ MBConv6, 640 channels (repeated layers)
+│
+├─→ Conv1x1, 2560 channels
+│
+├─→ Global Average Pooling
+│
+└─→ Feature Vector (2560 dimensions)
+``` 
+ 	
+5. Evaluation:
+* Purpose: Evaluates the model on a dataset, computing comprehensive performance metrics.
+
+  * Details:
+	* Inputs: Takes the model, a data_loader, and the loss function (criterion).
+	* Evaluation Mode: Sets model.eval() and disables gradient computation with torch.no_grad() for efficiency.
+	* Batch Processing:
+		* Moves inputs and labels to the device, computes outputs, and accumulates loss.
+		* Computes softmax probabilities (probs) and predictions (preds).
+		* Stores predictions, labels, and probabilities (for fake class) in lists.
+  * Metrics Calculation:
+	* loss: Average loss over batches.
+	* accuracy: Percentage of correct predictions.
+	* precision, recall, f1: Binary classification metrics from scikit-learn.
+	* auc: Area under the ROC curve using probabilities.
+	* cm: Confusion matrix.
+	* Output: Returns a dictionary of all computed metrics.
+
+6. Training:
+* Purpose: Trains the model with early stopping, checkpointing, and optional learning rate scheduling.
+
+  * Details:
+	* Inputs: Takes model, train_loader, val_loader, criterion, optimizer, and optional scheduler, num_epochs, and patience.
+	* Training Loop:
+		* Sets model.train(), computes loss, updates weights, and tracks training loss and accuracy per epoch.
+	* Validation Loop:
+		* Sets model.eval(), computes validation loss and accuracy without gradients.
+	* Metrics Tracking: Stores losses and accuracies for plotting.
+	* Scheduler: Adjusts learning rate based on validation loss if provided.
+	* Checkpointing: Saves the model state when validation loss improves, including epoch, model, and optimizer states.
+	* Early Stopping: Stops training if validation loss doesn’t improve for patience epochs.
+	* Memory Management: Clears GPU memory after each epoch.
+	* Output: Returns training and validation losses and accuracies.
+
+7. Plotting:
+* Creates a figure with two subplots: one for loss and one for accuracy. Plots training (blue) and validation (red) metrics with labels, titles, and grids. Saves the plot as training_results.png and displays it.
+
+8. Main():
+* Data Loading: Calls load_dataset with specified paths, handles errors, and prints dataset sizes.
+* Dataset Creation: Initializes DeepfakeDataset instances for train, validation, and test sets.
+* Data Loaders: Creates DataLoader instances with a small batch size (2) due to large images, using shuffling for training and multi-worker loading with pin_memory=True for efficiency.
+* Model Setup: Initializes DeepfakeClassifier, CrossEntropyLoss, Adam optimizer with weight decay, and a ReduceLROnPlateau scheduler.
+* Training: Runs train_model for 15 epochs with a patience of 5.
+* Plotting: Visualizes training results.
+* Evaluation: Runs evaluate_model on the test set and prints metrics.
+* Confusion Matrix: Plots and saves the confusion matrix using Seaborn.
+* Model Saving: Saves the trained model weights.
+* Cleanup: Clears GPU memory.
 
 <div align="center">
     <img src="Model/image.png" alt="LAE" style="width: 1000px; height: 600px;">
