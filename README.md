@@ -25,11 +25,18 @@ Unsplash, as described on its official website [Unsplash](https://unsplash.com/)
 ## Why UnFake Exists?: Reason to build this
 Unsplash, a platform hosting billions of images, faces the challenge of deepfake images, particularly those involving human faces and bodies. These AI-manipulated images pose a significant threat to the authenticity of digital media, impacting users who rely on Unsplash for creative and professional needs. The problem is to develop a deepfake image classification system that can accurately identify whether an image is real or a deepfake, thereby protecting users from potential harms such as misinformation, reputation damage, and legal liabilities.
 
+### Main Page
+
+<div align="center">
+	
+![image](https://github.com/user-attachments/assets/95f39515-2854-4576-8732-2b2863f0d6b5)
+</div>
+
 ### Demo (Click on image to watch video):
 
 <div align="center">
   <a href="https://drive.google.com/file/d/1Du6u_1jxerVEeP3ZST4kDoONDGW7i9di/view?usp=sharing">
-    <img src="https://imgur.com/a/PHtJCjV.jpg" alt="Resume review video preview" width="400" style="display:inline-block; margin:10px;">
+    <img src="https://imgur.com/EtWp5hO.jpg" alt="deepfake detection demo" width="800" style="display:inline-block; margin:10px;">
 </div>
 
 ## Users of Unsplash and Similar Sites
@@ -54,6 +61,9 @@ Deepfake images can lead to:
 6. Contractual Breaches: Uploading manipulated content may violate platform terms, risking penalties.
 
 ### System Design
+
+<div align="center">
+	
 ```txt
 +-------------------------------------------------------------+
 |                        [User] 👤                            |
@@ -101,13 +111,7 @@ Deepfake images can lead to:
 |                        [User] 👤                            |
 |   Sees Images, Details, and Deepfake Results                |
 +-------------------------------------------------------------+
-
 ```
-### Landing page
-
-<div align="center">
-    
-![image](https://github.com/user-attachments/assets/1ccafe98-7c28-4b0a-858f-5de4da3a7f0a)
 </div>
 
 ## ⚙️ Setup

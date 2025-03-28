@@ -70,6 +70,6 @@ def process_images_to_deepfake(input_folder, output_folder):
 
 # Example usage
 if __name__ == "__main__":
-    input_folder = "/home/vu-lab03-pc24/Downloads/image_folders/beardedface-images"
-    output_folder = "/home/vu-lab03-pc24/Downloads/deepfakeimg/beardimg"
+    input_folder = "/home/vu-lab03-pc24/Downloads/image_folders/closeup-face-images"
+    output_folder = "/home/vu-lab03-pc24/Downloads/deepfakeimg/clsup"
     process_images_to_deepfake(input_folder, output_folder)
