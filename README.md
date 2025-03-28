@@ -53,21 +53,6 @@ Deepfake images can lead to:
 5. Criminal Offenses: In some jurisdictions, deepfakes, especially pornographic or harassing, can be criminal.
 6. Contractual Breaches: Uploading manipulated content may violate platform terms, risking penalties.
 
-## Scope of training
-Dataset and Categories
-  - The dataset comprises around 2,50,000 in which around 76,000 images are scraped from Unsplash using its API and rest from publically available datasets(with deepfake images and some are generated using stable diffusion) and the images are categorized into:
-
-* General Human Faces:
-  - Human face images.
-* Ethnic Diversity:
-  -Asian,Black,Caucasian face images.
-* Facial Features:
-  -Bearded, freckles, wrinkled, and spectacles face images.
-* Age Variation:
-  -Child face images.
-* Pose & Composition:
-  -Close-up and headshot/portrait images.
-
 ### System Design
 ```txt
 +-------------------------------------------------------------+
@@ -186,7 +171,24 @@ params = {
 * The headers include the authorization token.
 * The params dictionary specifies the search query and the number of images per page.
 
-Model Training:
+## Model Training:
+
+1. Scope of dataset
+
+Dataset and Categories
+  - The dataset comprises around 2,50,000 in which around 76,000 images are scraped from Unsplash using its API and rest from publically available datasets(with deepfake images and some are generated using stable diffusion) and the images are categorized into:
+
+* General Human Faces:
+  - Human face images.
+* Ethnic Diversity:
+  -Asian,Black,Caucasian face images.
+* Facial Features:
+  -Bearded, freckles, wrinkled, and spectacles face images.
+* Age Variation:
+  -Child face images.
+* Pose & Composition:
+  -Close-up and headshot/portrait images.
+
 
 <div align="center">
     <img src="Model/image.png" alt="LAE" style="width: 1000px; height: 600px;">
