@@ -193,7 +193,24 @@ Dataset and Categories
 * Pose & Composition:
   -Close-up and headshot/portrait images.
 
-2. Data Transformations
+2. Data Transformations:
+
+* Purpose: Defines preprocessing and augmentation pipelines for training and validation datasets to enhance model robustness and compatibility with EfficientNet-B7.
+
+* Details:
+  * train Pipeline:
+    * Resize((600, 600)): Resizes images to 600x600 pixels, matching the model's expected input size.
+    * RandomHorizontalFlip(): Randomly flips images horizontally with a 50% chance, simulating natural variations.
+    * RandomRotation(15): Rotates images by up to 15 degrees, adding rotational invariance.
+    * ColorJitter(...): Adjusts brightness, contrast, saturation, and hue within specified ranges, mimicking lighting variations.
+    * RandomAffine(...): Applies random affine transformations (rotation up to 5 degrees, translation, and scaling), increasing geometric diversity.
+    * RandomPerspective(...): Adds random perspective distortions with a 50% probability, simulating viewpoint changes.
+    * ToTensor(): Converts the PIL image to a PyTorch tensor (HWC to CHW format).
+    * Normalize(mean, std): Normalizes the tensor using ImageNet mean and standard deviation for compatibility with pre-trained models.
+    * RandomErasing(p=0.2): Randomly erases a patch of the image with 20% probability, enhancing robustness to occlusions.
+
+  * val Pipeline:
+    * Includes only Resize, ToTensor, and Normalize, ensuring consistent evaluation without random augmentations.
 
 
 
