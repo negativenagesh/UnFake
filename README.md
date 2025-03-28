@@ -238,7 +238,61 @@ Dataset and Categories
 		* Adds a Dropout(0.3) layer for regularization (30% dropout rate) and a fully connected layer (fc) mapping 2560 features (EfficientNet-B7 output size) to num_classes (2: real or fake).
 	* forward(self, x):
 		* Passes input tensor x through the base model, applies dropout, and outputs logits via the fully connected layer.
+  * Components
+	* Base Model: EfficientNet-B7
+		* Role: Acts as the feature extractor, processing raw input images into a high-dimensional feature vector that captures hierarchical patterns and details.
+		* Pretrained Weights: The model attempts to load weights pre-trained on ImageNet (pretrained=True) to benefit from transfer learning, which provides a strong starting point for feature extraction. If this fails 		(e.g., due to a network issue), it falls back to random initialization (pretrained=False).
+		* Modification: The original classification head of EfficientNet-B7 is removed by setting num_classes=0 in create_model, allowing a custom head to be added for the deepfake detection task.
+	* Dropout Layer:
+		* Role: A regularization layer with a dropout rate of 0.3 (30% of inputs are randomly set to zero during training) to prevent overfitting and improve the model’s generalization to unseen data.
+	* Fully Connected Layer:
+		* Role: A linear layer (nn.Linear) that takes the 2560-dimensional feature vector from EfficientNet-B7 and maps it to a 2-dimensional output, corresponding to the two classes (real and fake).
+	* Forward Pass:
+		* Input: A batch of images represented as tensors (e.g., shape [batch_size, channels, height, width]).
+	* Processing:
+		* The input tensor passes through the EfficientNet-B7 base model, which outputs a 2560-dimensional feature vector for each image.
+		* The feature vector is processed by the dropout layer, randomly dropping 30% of the values during training to enhance robustness.
+		* The resulting vector is fed into the fully connected layer, producing logits (raw scores) for the two classes.
+		* Output: A tensor of shape [batch_size, 2] containing logits, which can be converted to probabilities using a softmax function during inference.
 
+   * Architecture of EfficientNet-B7
+	* EfficientNet-B7 is a convolutional neural network (CNN) from the EfficientNet family, designed to achieve high accuracy with fewer parameters and computational resources compared to traditional models. It uses a compound scaling method and advanced building blocks to optimize performance.
+
+	* Key Concepts
+		* Compound Scaling: EfficientNet scales three dimensions of a baseline model (EfficientNet-B0)—depth (number of layers), width (number of channels), and resolution (input image size)—using a compound scaling formula. For EfficientNet-B7, this results in a deeper, wider network with a higher input resolution (600x600) compared to B0 (224x224).
+		* MBConv Blocks: The primary building block is the Mobile Inverted Bottleneck Convolution (MBConv), an efficient version of the inverted residual block from MobileNetV2. It reduces computation using depthwise separable convolutions.
+		* Squeeze-and-Excitation (SE) Modules: Integrated into MBConv blocks, SE modules enhance feature representation by recalibrating channel-wise responses, allowing the model to focus on the most relevant features.
+
+```txt
+High-Level Architecture Diagram
+
+Input Image (600x600x3)
+│
+├─→ Conv3x3, 64 channels, stride 2
+│
+├─→ MBConv1, 64 channels
+│
+├─→ MBConv6, 80 channels (repeated layers)
+│
+├─→ MBConv6, 112 channels (repeated layers)
+│
+├─→ MBConv6, 160 channels (repeated layers)
+│
+├─→ MBConv6, 192 channels (repeated layers)
+│
+├─→ MBConv6, 224 channels (repeated layers)
+│
+├─→ MBConv6, 384 channels (repeated layers)
+│
+├─→ MBConv6, 640 channels (repeated layers)
+│
+├─→ Conv1x1, 2560 channels
+│
+├─→ Global Average Pooling
+│
+└─→ Feature Vector (2560 dimensions)
+``` 
+ 	
 5. Evaluation:
 * Purpose: Evaluates the model on a dataset, computing comprehensive performance metrics.
 
