@@ -173,7 +173,7 @@ params = {
 
 ## Model Training:
 
-1. Scope of dataset
+1. Scope of dataset:
 
 Dataset and Categories
   - The dataset comprises around 2,50,000 in which around 76,000 images are scraped from Unsplash using its API and rest from publically available datasets(with deepfake images and some are generated using stable diffusion) and the images are categorized into:
@@ -188,6 +188,9 @@ Dataset and Categories
   -Child face images.
 * Pose & Composition:
   -Close-up and headshot/portrait images.
+
+2. Data Transformations
+
 
 
 <div align="center">
