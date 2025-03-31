@@ -230,6 +230,10 @@ Dataset and Categories
 	* First train_test_split: Splits data into 70% training (train_paths, train_labels) and 30% temporary (temp_paths, temp_labels), with stratify=labels to maintain class balance.
 	* Second train_test_split: Splits the temporary set into 15% validation and 15% test sets, again with stratification.
 	* Output: Returns six lists: paths and labels for training, validation, and test sets.
+ <div align="center">
+	 
+  ![image](https://github.com/user-attachments/assets/ef5471ea-6a6a-4bcc-8103-04defe70c5ee)
+</div>
 
 4. Model Definition:
 
