@@ -1,9 +1,8 @@
-# ...existing code...
+# src/components/hero_section.py
+
 def render_hero_section():
     """
-    Hero section HTML with 'Get Started' button linking to '?page=image_search'.
-    Removing the 'onclick' and keeping only 'href' + 'target="_self"' will help
-    ensure correct navigation in the same tab.
+    Hero section HTML with buttons for demo, custom image testing, and getting started.
     """
     hero_html = """
     <div class="hero-text">
@@ -19,6 +18,14 @@ def render_hero_section():
                       padding: 10px 24px; font-weight: bold; border-radius: 5px; 
                       text-decoration: none; background-color: #ff4b4b; color: white;">
                Try Demo
+            </a>
+            <a href="?page=custom_image" target="_self"
+               class="hero-button custom-image-btn"
+               style="margin-right: 20px; display: inline-block; text-align: center; 
+                      padding: 10px 24px; font-weight: bold; border-radius: 5px; 
+                      text-decoration: none; background-color: transparent; color: white;
+                      border: 2px solid white;">
+               Test Custom Image
             </a>
             <a href="?page=image_search" target="_self"
                class="hero-button how-it-works-btn"
