@@ -1192,3 +1192,233 @@ html, body {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+/* Custom Image Analysis Styles */
+.custom-image-section {
+    background-color: #1A1A1A;
+    border-radius: 10px;
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.custom-image-section .header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.custom-image-section .title {
+    color: #ffffff;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.custom-image-section .highlight {
+    color: #ff4b4b;
+    position: relative;
+}
+
+.custom-image-section .underline {
+    height: 4px;
+    width: 80px;
+    background-color: #ff4b4b;
+    margin: 15px auto;
+}
+
+.custom-image-section .subtitle {
+    color: #cccccc;
+    font-size: 1.2rem;
+}
+
+.custom-image-btn {
+    background-color: transparent;
+    color: white !important;
+    border: 2px solid white;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+}
+
+.custom-image-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+/* File uploader styling enhancement */
+.stFileUploader {
+    background-color: #2A2A2A !important;
+    border-radius: 10px !important;
+    padding: 20px !important;
+    border: 2px dashed #555555 !important;
+    margin-bottom: 20px !important;
+    transition: all 0.3s ease;
+}
+
+.stFileUploader:hover {
+    border-color: #FF0000 !important;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2) !important;
+}
+
+/* Analysis results styling */
+.analysis-results-container {
+    padding: 20px;
+    background-color: #2A2A2A;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.analysis-results-container h2 {
+    color: #FFFFFF;
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.result-card {
+    display: flex;
+    background-color: #333333;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+.result-card.fake {
+    border-left: 5px solid #DC3545;
+}
+
+.result-card.real {
+    border-left: 5px solid #28A745;
+}
+
+.result-icon {
+    font-size: 36px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.result-card.fake .result-icon {
+    color: #DC3545;
+}
+
+.result-card.real .result-icon {
+    color: #28A745;
+}
+
+.result-text {
+    flex: 1;
+}
+
+.result-text h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+.result-text p {
+    color: #CCCCCC;
+    margin-bottom: 15px;
+}
+
+.confidence-bar {
+    height: 10px;
+    background-color: #444444;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+.confidence-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 1s ease-in-out;
+}
+
+.result-card.fake .confidence-fill {
+    background-color: #DC3545;
+}
+
+.result-card.real .confidence-fill {
+    background-color: #28A745;
+}
+
+.confidence-text {
+    font-size: 14px;
+    color: #AAAAAA;
+    text-align: right;
+}
+
+.analysis-details {
+    background-color: #333333;
+    border-radius: 10px;
+    padding: 20px;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+.analysis-details h3 {
+    color: #FFFFFF;
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.analysis-details ul {
+    color: #CCCCCC;
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.analysis-details li {
+    margin-bottom: 5px;
+}
+
+.analysis-note {
+    font-size: 12px;
+    color: #888888;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Button styling */
+.stButton > button {
+    background-color: #FF0000 !important;
+    color: white !important;
+    font-weight: bold !important;
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 10px 20px !important;
+    transition: all 0.3s ease !important;
+}
+
+.stButton > button:hover {
+    background-color: #D10000 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3) !important;
+}
+
+.stButton > button:active {
+    transform: translateY(0) !important;
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
