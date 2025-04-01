@@ -322,6 +322,13 @@ Input Image (600x600x3)
 	* cm: Confusion matrix.
 	* Output: Returns a dictionary of all computed metrics.
 
+    <div>
+	
+	![image](https://github.com/user-attachments/assets/ef90954d-e5f8-4e6c-a843-bb24966e7ffa)
+
+	![image](https://github.com/user-attachments/assets/fb6ef98f-3550-49d0-84c2-bc5e3dd6125a)
+    </div>
+
 6. Training:
 * Purpose: Trains the model with early stopping, checkpointing, and optional learning rate scheduling.
 
