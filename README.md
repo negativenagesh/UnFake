@@ -198,6 +198,8 @@ Dataset and Categories
 * Pose & Composition:
   -Close-up and headshot/portrait images.
 
+Download real images from my [kaggle](https://www.kaggle.com/datasets/subrahmanya090/face-images-high-quality-scraped-from-unsplash)
+
 2. Data Transformations:
 
 * Purpose: Defines preprocessing and augmentation pipelines for training and validation datasets to enhance model robustness and compatibility with EfficientNet-B7.
