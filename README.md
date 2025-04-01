@@ -34,7 +34,8 @@ Unsplash, a platform hosting billions of images, faces the challenge of deepfake
 
 <div align="center">
 	
-![image](https://github.com/user-attachments/assets/95f39515-2854-4576-8732-2b2863f0d6b5)
+![image](https://github.com/user-attachments/assets/119f8869-04de-41d4-98db-c3363e36f439)
+
 </div>
 
 ### Demo (Click on image to watch video):
