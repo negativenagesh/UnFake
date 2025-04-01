@@ -271,6 +271,12 @@ Download real images from my [kaggle](https://www.kaggle.com/datasets/subrahmany
 
 	* Key Concepts
 		* Compound Scaling: EfficientNet scales three dimensions of a baseline model (EfficientNet-B0)—depth (number of layers), width (number of channels), and resolution (input image size)—using a compound scaling formula. For EfficientNet-B7, this results in a deeper, wider network with a higher input resolution (600x600) compared to B0 (224x224).
+
+<div align="center">
+
+![image](https://github.com/user-attachments/assets/dfbdf42c-5383-4aaa-8302-b0438e6516b3) 
+</div>
+ 
 		* MBConv Blocks: The primary building block is the Mobile Inverted Bottleneck Convolution (MBConv), an efficient version of the inverted residual block from MobileNetV2. It reduces computation using depthwise separable convolutions.
 		* Squeeze-and-Excitation (SE) Modules: Integrated into MBConv blocks, SE modules enhance feature representation by recalibrating channel-wise responses, allowing the model to focus on the most relevant features.
 
