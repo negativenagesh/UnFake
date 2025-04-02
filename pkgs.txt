@@ -18,3 +18,5 @@ beautifulsoup4
 webdriver-manager
 streamlit
 opencv-python
+fastapi
+uvicorn
