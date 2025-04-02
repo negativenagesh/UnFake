@@ -17,7 +17,7 @@ def render_deepfake_detection():
             <span class="result-text">DEEPFAKE DETECTED</span>
             <span class="confidence-text">CONFIDENCE: 96.7%</span>
         </div>
-        <div class="version-text">UnFake v1.2.1</div>
+        <div class="version-text">UnFake v0.1.0</div>
     </div>
     """
 
