@@ -5,8 +5,8 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import streamlit as st
-from src.app import show_custom_landing_page, setup_page_styling
-from src.components.image_scraper import show_image_search_page, show_image_details_page
+from src.app import show_custom_landing_page, apply_global_styling
+from src.components.image_scraper import show_image_search_page, show_image_details_page, show_custom_image_page
 
 # Set page configuration
 st.set_page_config(
@@ -18,19 +18,27 @@ st.set_page_config(
 
 def main():
     """Main function to determine which page to display based on query parameters."""
-    # Get the current query parameters
-    params = st.query_params
-    # Extract the 'page' parameter, default to "landing" if not present
-    page = params.get("page", "landing")
-
-    # Render the appropriate page based on the query parameter
-    if page in ["image_search", "image_scraper"]:
-        setup_page_styling()
+    # Apply global styling once
+    apply_global_styling()
+    
+    # Get the page from query parameters
+    query_params = st.query_params
+    page = query_params.get("page", ["landing"])[0] if isinstance(query_params.get("page", ["landing"]), list) else query_params.get("page", "landing")
+    
+    # Set the page in session state
+    if "page" not in st.session_state:
+        st.session_state.page = page
+    elif page != "landing":  # Only update if coming from a direct link
+        st.session_state.page = page
+    
+    # Route to appropriate page - each function renders its own navbar and content
+    if st.session_state.page == "image_search":
         show_image_search_page()
-    elif page == "details":
-        setup_page_styling()
+    elif st.session_state.page == "details":
         show_image_details_page()
-    else:  # Default to landing page
+    elif st.session_state.page == "custom_image":
+        show_custom_image_page()
+    else:
         show_custom_landing_page()
 
 if __name__ == "__main__":
