@@ -6,10 +6,12 @@ import time
 # Add backend to path (adjust based on your structure)
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
+from src.components.navbar import render_navbar  # Added import
 from backend.unsplashscrap import scrape_unsplash_images  # Ensure this matches your file structure
 
 def show_landing_page():
     """Display the landing page."""
+    render_navbar()  # Added
     st.title("Welcome to UnFake")
     st.write("This is the landing page.")
     if st.button("Go to Image Search"):
@@ -19,6 +21,7 @@ def show_landing_page():
 
 def show_image_search_page():
     """Render the image search page with Unsplash image scraping functionality."""
+    render_navbar()  # Added
     # Custom CSS for the search page
     st.markdown("""
     <style>
@@ -54,7 +57,6 @@ def show_image_search_page():
     }
     </style>
     """, unsafe_allow_html=True)
-    
     
     # Initialize session state
     if 'page_number' not in st.session_state:
@@ -172,6 +174,7 @@ def show_image_search_page():
 
 def show_image_details_page():
     """Display the details of the selected image."""
+    render_navbar()  # Added
     # Custom CSS for the details page
     st.markdown("""
     <style>
@@ -308,4 +311,59 @@ def show_image_details_page():
             st.session_state.fake_detection_result = None
         st.session_state.page = "image_scraper"
         st.query_params["page"] = "image_search"
+        st.rerun()
+
+def show_custom_image_page():
+    """Display the custom image upload page and analyze uploaded images."""
+    render_navbar()  # Added
+    st.title("Test Custom Image")
+    st.markdown("Upload any image to check if it's a deepfake")
+    
+    # File uploader for custom images
+    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+    
+    if uploaded_file is not None:
+        # Display the uploaded image
+        st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
+        
+        # Add a button to run the analysis
+        if st.button("Analyze Image", type="primary"):
+            with st.spinner("Analyzing image..."):
+                try:
+                    # Save the uploaded file temporarily
+                    temp_path = f"temp_upload_{int(time.time())}.jpg"
+                    with open(temp_path, "wb") as f:
+                        f.write(uploaded_file.getbuffer())
+                    
+                    # Import the backend function for fake detection
+                    from backend.deepfake_detection import analyze_image_for_streamlit
+                    
+                    # Call the analysis function
+                    result = analyze_image_for_streamlit(temp_path)
+                    
+                    # Display results
+                    st.markdown("### Analysis Result")
+                    if result.get("is_fake", False):
+                        st.error(f"⚠️ This image appears to be FAKE with {result.get('confidence', 0)*100:.1f}% confidence")
+                        
+                        # Show additional analysis results if available
+                        if "message" in result and result["message"]:
+                            st.info(result["message"])
+        
+                    else:
+                        st.success(f"✅ This image appears to be REAL with {result.get('confidence', 0)*100:.1f}% confidence")
+                    
+                    # Clean up the temporary file
+                    if os.path.exists(temp_path):
+                        os.remove(temp_path)
+                        
+                except Exception as e:
+                    st.error(f"Error during fake detection: {str(e)}")
+                    import traceback
+                    st.exception(traceback.format_exc())
+    
+    # Back button
+    if st.button("Back to Home"):
+        st.session_state.page = "landing"
+        st.query_params.clear()
         st.rerun()
