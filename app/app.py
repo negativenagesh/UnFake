@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 import streamlit as st
 from src.app import show_custom_landing_page, apply_global_styling
 from src.components.image_scraper import show_image_search_page, show_image_details_page, show_custom_image_page
+from src.components.unfake_api import render_unfake_api_page
 
 # Set page configuration
 st.set_page_config(
@@ -38,6 +39,8 @@ def main():
         show_image_details_page()
     elif st.session_state.page == "custom_image":
         show_custom_image_page()
+    elif page == "unfake_api":
+        render_unfake_api_page()
     else:
         show_custom_landing_page()
 
