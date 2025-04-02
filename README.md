@@ -34,7 +34,8 @@ Unsplash, a platform hosting billions of images, faces the challenge of deepfake
 
 <div align="center">
 	
-![image](https://github.com/user-attachments/assets/95f39515-2854-4576-8732-2b2863f0d6b5)
+![image](https://github.com/user-attachments/assets/119f8869-04de-41d4-98db-c3363e36f439)
+
 </div>
 
 ### Demo (Click on image to watch video):
@@ -199,6 +200,7 @@ Dataset and Categories
   -Close-up and headshot/portrait images.
 
 Download real images from my [kaggle](https://www.kaggle.com/datasets/subrahmanya090/face-images-high-quality-scraped-from-unsplash)
+Real and fake from [here as well](https://www.kaggle.com/datasets/manjilkarki/deepfake-and-real-images)
 
 2. Data Transformations:
 
@@ -271,38 +273,40 @@ Download real images from my [kaggle](https://www.kaggle.com/datasets/subrahmany
 
 	* Key Concepts
 		* Compound Scaling: EfficientNet scales three dimensions of a baseline model (EfficientNet-B0)—depth (number of layers), width (number of channels), and resolution (input image size)—using a compound scaling formula. For EfficientNet-B7, this results in a deeper, wider network with a higher input resolution (600x600) compared to B0 (224x224).
+
+<div align="center">
+
+![image](https://github.com/user-attachments/assets/dfbdf42c-5383-4aaa-8302-b0438e6516b3) 
+</div>
+ 
 		* MBConv Blocks: The primary building block is the Mobile Inverted Bottleneck Convolution (MBConv), an efficient version of the inverted residual block from MobileNetV2. It reduces computation using depthwise separable convolutions.
 		* Squeeze-and-Excitation (SE) Modules: Integrated into MBConv blocks, SE modules enhance feature representation by recalibrating channel-wise responses, allowing the model to focus on the most relevant features.
+<div align="center">
 
 ```txt
 High-Level Architecture Diagram
 
-Input Image (600x600x3)
-│
-├─→ Conv3x3, 64 channels, stride 2
-│
-├─→ MBConv1, 64 channels
-│
-├─→ MBConv6, 80 channels (repeated layers)
-│
-├─→ MBConv6, 112 channels (repeated layers)
-│
-├─→ MBConv6, 160 channels (repeated layers)
-│
-├─→ MBConv6, 192 channels (repeated layers)
-│
-├─→ MBConv6, 224 channels (repeated layers)
-│
-├─→ MBConv6, 384 channels (repeated layers)
-│
-├─→ MBConv6, 640 channels (repeated layers)
-│
-├─→ Conv1x1, 2560 channels
-│
-├─→ Global Average Pooling
-│
-└─→ Feature Vector (2560 dimensions)
-``` 
+Input (600x600x3)
+    |
+[Stem: Conv 3x3, 64 filters, stride 2] → (300x300x64)
+    |
+[Stage 1: 3x MBConv1, 32 filters, stride 1] → (300x300x32)
+    |
+[Stage 2: 6x MBConv6, 48 filters, stride 2 first block] → (150x150x48)
+    |
+[Stage 3: 6x MBConv6, 80 filters, stride 2 first block] → (75x75x80)
+    |
+[Stage 4: 9x MBConv6, 160 filters, stride 2 first block] → (38x38x160)
+    |
+[Stage 5: 9x MBConv6, 224 filters, stride 1] → (38x38x224)
+    |
+[Stage 6: 12x MBConv6, 384 filters, stride 2 first block] → (19x19x384)
+    |
+[Stage 7: 3x MBConv6, 640 filters, stride 1] → (19x19x640)
+    |
+[Head: Conv 1x1, Global Avg Pooling, FC] → (1x1x1280) → Output (classes)
+```
+</div>
  	
 5. Evaluation:
 * Purpose: Evaluates the model on a dataset, computing comprehensive performance metrics.
@@ -322,10 +326,9 @@ Input Image (600x600x3)
 	* cm: Confusion matrix.
 	* Output: Returns a dictionary of all computed metrics.
 
-    <div>
+    <div align="center">
 	
 	![image](https://github.com/user-attachments/assets/ef90954d-e5f8-4e6c-a843-bb24966e7ffa)
-
 	![image](https://github.com/user-attachments/assets/fb6ef98f-3550-49d0-84c2-bc5e3dd6125a)
     </div>
 
