@@ -20,7 +20,9 @@ def render_footer():
     <div class="footer-container">
         <div class="footer-content">
             <div class="footer-column">
-                <img src="data:image/png;base64,{get_image_as_base64(logo_path)}" height="50" alt="UnFake" style="margin-bottom: 20px;">
+                <a href="/">
+                    <img src="data:image/png;base64,{get_image_as_base64(logo_path)}" height="50" alt="UnFake" style="margin-bottom: 20px;">
+                </a>
                 <p>Distinguishing reality from fabrication in the digital age with advanced deepfake detection technology.</p>
                 <div class="social-icons">
                     <a href="https://github.com/negativenagesh/UnFake" target="_blank">
