@@ -14,9 +14,8 @@ from src.components.dataset_section import render_dataset_section
 from src.components.use_cases_section import render_use_cases_section
 from src.components.footer import render_footer
 
-def show_custom_landing_page():
-    """Render the landing page with the new Footer section."""
-    # Page styling
+def apply_global_styling():
+    """Apply shared styling for all pages without rendering content."""
     st.markdown(
         """
         <style>
@@ -34,12 +33,12 @@ def show_custom_landing_page():
         """,
         unsafe_allow_html=True
     )
-
-    render_navbar()
-
-    # Load custom CSS
     with open("src/styles/styles.css") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+def show_custom_landing_page():
+    """Render the landing page with the new Footer section."""
+    render_navbar()
 
     # Hero section
     st.markdown('<div id="hero-section"></div>', unsafe_allow_html=True)
@@ -88,12 +87,12 @@ def show_custom_landing_page():
     use_cases_html = render_use_cases_section()
     st.markdown(use_cases_html, unsafe_allow_html=True)
 
-    # Footer section (new)
+    # Footer section
     footer_html = render_footer()
     st.markdown(footer_html, unsafe_allow_html=True)
 
 def setup_page_styling():
-    """Apply shared styling for all pages."""
+    """Apply shared styling for all pages (kept for compatibility, but updated)."""
     st.markdown(
         """
         <style>
