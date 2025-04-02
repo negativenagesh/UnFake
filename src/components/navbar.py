@@ -13,7 +13,9 @@ def render_navbar():
     navbar_html = f"""
     <div class="navbar">
         <div class="navbar-logo">
-            <img src="data:image/png;base64,{get_image_as_base64(logo_path)}" height="150">
+            <a href="/">
+                <img src="data:image/png;base64,{get_image_as_base64(logo_path)}" height="150">
+            </a>
         </div>
         <div class="navbar-links">
             <a href="#hero-section" style="font-size: 18px;">Home</a>
