@@ -8,10 +8,10 @@
 
 <div align="center">
   
-![GitHub stars](https://img.shields.io/github/stars/negativenagesh/deep-fake?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/negativenagesh/deep-fake?style=social)
-![GitHub forks](https://img.shields.io/github/forks/negativenagesh/deep-fake?style=social)
-![GitHub license](https://img.shields.io/github/license/negativenagesh/deep-fake)
+![GitHub stars](https://img.shields.io/github/stars/negativenagesh/UnFake?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/negativenagesh/UnFake?style=social)
+![GitHub forks](https://img.shields.io/github/forks/negativenagesh/UnFake?style=social)
+![GitHub license](https://img.shields.io/github/license/negativenagesh/UnFake)
 </div>
 
 <div align="center">
